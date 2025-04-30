@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { ChartBar, Shield } from "lucide-react";
+import { ChartBar, Shield, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -16,19 +17,25 @@ const HeroSection = () => {
               The complete business management solution that simplifies accounting, inventory, GST compliance, and more.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium">
-                Register for Free Webinar
-              </Button>
-              <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
-                Start Free Trial
-              </Button>
+              <Link to="#webinar">
+                <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium group transition-all duration-300 transform hover:scale-105 pulse-button">
+                  Register for Free Webinar
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/combined">
+                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white group transition-all duration-300">
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
             <div className="flex items-center mt-8 space-x-6">
-              <div className="flex items-center">
+              <div className="flex items-center animate-fade-in delay-100">
                 <Shield className="h-5 w-5 mr-2 text-secondary" />
                 <span className="text-sm">GST Compliant</span>
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center animate-fade-in delay-200">
                 <ChartBar className="h-5 w-5 mr-2 text-secondary" />
                 <span className="text-sm">Real-time Reports</span>
               </div>
@@ -38,7 +45,7 @@ const HeroSection = () => {
           <div className="md:w-1/2 relative animate-slide-up opacity-0" style={{ animationDelay: '0.3s' }}>
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-secondary/30 to-transparent rounded-lg transform rotate-6"></div>
-              <div className="relative bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200">
+              <div className="relative bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 hover-lift">
                 <div className="bg-gray-800 h-8 flex items-center px-4">
                   <div className="flex space-x-2">
                     <div className="h-3 w-3 rounded-full bg-red-500"></div>

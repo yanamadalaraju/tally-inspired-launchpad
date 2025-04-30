@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -10,7 +11,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-sm fixed w-full z-10">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <span className="text-primary font-bold text-xl">BizManager</span>
+          <Link to="/" className="text-primary font-bold text-xl hover:text-primary/80 transition-colors">BizManager</Link>
         </div>
         
         <div className="hidden md:flex space-x-6">
@@ -21,12 +22,16 @@ const Navbar = () => {
         </div>
         
         <div className="hidden md:flex space-x-3">
-          <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-            Log In
-          </Button>
-          <Button className="bg-secondary hover:bg-secondary-light text-white">
-            Start Free Trial
-          </Button>
+          <Link to="/existing-customers">
+            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">
+              Log In
+            </Button>
+          </Link>
+          <Link to="/combined">
+            <Button className="bg-secondary hover:bg-secondary-light text-white transition-all duration-300 transform hover:scale-105">
+              Start Free Trial
+            </Button>
+          </Link>
         </div>
         
         <button 
@@ -45,12 +50,16 @@ const Navbar = () => {
             <a href="#webinar" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-primary transition-colors py-2">Webinar</a>
             <a href="#testimonials" onClick={() => setIsMenuOpen(false)} className="text-gray-600 hover:text-primary transition-colors py-2">Testimonials</a>
             <div className="flex flex-col space-y-2 pt-2">
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white">
-                Log In
-              </Button>
-              <Button className="bg-secondary hover:bg-secondary-light text-white">
-                Start Free Trial
-              </Button>
+              <Link to="/existing-customers" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
+                  Log In
+                </Button>
+              </Link>
+              <Link to="/combined" onClick={() => setIsMenuOpen(false)}>
+                <Button className="w-full bg-secondary hover:bg-secondary-light text-white">
+                  Start Free Trial
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
