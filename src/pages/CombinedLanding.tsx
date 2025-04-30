@@ -1,12 +1,36 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from "@/components/ui/button";
 import WebinarForm from '../components/WebinarForm';
-import { ArrowRight, Activity, Shield, Database, PieChart, Server, Users, ChevronRight, Lock, RefreshCw } from "lucide-react";
+import BusinessChallenges from '../components/BusinessChallenges';
+import { ArrowRight, Activity, Shield, Database, PieChart, Server, Users as UsersIcon, ChevronRight, Lock, RefreshCw } from "lucide-react";
 
 const CombinedLanding = () => {
+  // Add a scroll reveal effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const elements = document.querySelectorAll('.reveal-on-scroll');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if (elementTop < windowHeight - 100) {
+          element.classList.add('animate-fade-in');
+          element.classList.remove('opacity-0');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    // Initial check
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const keyFeatures = [
     {
       title: "Smart Accounting",
@@ -70,11 +94,11 @@ const CombinedLanding = () => {
                 Whether you're new to our platform or an existing customer, discover how our comprehensive solution can transform your business operations.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium group">
+                <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium group" onClick={() => document.getElementById('new-customers')?.scrollIntoView({ behavior: 'smooth' })}>
                   <span>New Customer? Learn More</span>
                   <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button size="lg" variant="outline" className="bg-white hover:bg-gray-100 text-primary border-white hover:border-white group">
+                <Button size="lg" variant="outline" className="bg-white hover:bg-gray-100 text-primary border-white hover:border-white group" onClick={() => document.getElementById('existing-customers')?.scrollIntoView({ behavior: 'smooth' })}>
                   <span>Existing Customer? Login</span>
                   <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -124,10 +148,13 @@ const CombinedLanding = () => {
         </div>
       </section>
 
+      {/* Business Challenges Section */}
+      <BusinessChallenges />
+
       {/* For New Customers Section */}
       <section id="new-customers" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 reveal-on-scroll opacity-0">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Discover Our Powerful Features</h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Our comprehensive business management solution brings together everything you need to streamline operations and drive growth.
@@ -136,7 +163,7 @@ const CombinedLanding = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {keyFeatures.map((feature, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:transform hover:translate-y-[-5px]">
+              <div key={index} className="bg-white rounded-xl shadow-md p-6 border border-gray-100 hover:shadow-lg transition-all duration-300 hover:transform hover:translate-y-[-5px] reveal-on-scroll opacity-0" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="bg-primary/5 p-4 rounded-lg inline-block mb-5">
                   {feature.icon}
                 </div>
@@ -146,7 +173,7 @@ const CombinedLanding = () => {
             ))}
           </div>
 
-          <div className="text-center">
+          <div className="text-center reveal-on-scroll opacity-0">
             <Button 
               variant="default"
               className="bg-secondary hover:bg-secondary-light text-white"
@@ -162,7 +189,7 @@ const CombinedLanding = () => {
       {/* For Existing Customers Section */}
       <section id="existing-customers" className="py-16 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 reveal-on-scroll opacity-0">
             <div className="inline-block bg-secondary/20 text-secondary px-4 py-1 rounded-full text-sm font-medium mb-4">
               Existing Customers
             </div>
@@ -174,7 +201,7 @@ const CombinedLanding = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {customerResources.map((resource, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300">
+              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-300 reveal-on-scroll opacity-0" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="p-6">
                   <div className="bg-primary/10 p-3 rounded-lg inline-block mb-4">
                     {resource.icon}
@@ -198,20 +225,27 @@ const CombinedLanding = () => {
       {/* Statistics Section */}
       <section className="py-16 md:py-24 bg-primary text-white">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-10 reveal-on-scroll opacity-0">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Trusted by Over 2.5 Million Businesses</h2>
+            <p className="text-lg text-gray-200 max-w-3xl mx-auto">
+              Join the community of successful businesses that have transformed their operations with our solution.
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">20,000+</div>
+            <div className="p-6 reveal-on-scroll opacity-0" style={{ animationDelay: '0.1s' }}>
+              <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">2.5M+</div>
               <p className="text-gray-200">Businesses Empowered</p>
             </div>
-            <div className="p-6">
+            <div className="p-6 reveal-on-scroll opacity-0" style={{ animationDelay: '0.2s' }}>
               <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">98%</div>
               <p className="text-gray-200">Customer Satisfaction</p>
             </div>
-            <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">5M+</div>
+            <div className="p-6 reveal-on-scroll opacity-0" style={{ animationDelay: '0.3s' }}>
+              <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">15M+</div>
               <p className="text-gray-200">Transactions Processed</p>
             </div>
-            <div className="p-6">
+            <div className="p-6 reveal-on-scroll opacity-0" style={{ animationDelay: '0.4s' }}>
               <div className="text-4xl md:text-5xl font-bold text-secondary mb-2">24/7</div>
               <p className="text-gray-200">Expert Support</p>
             </div>
