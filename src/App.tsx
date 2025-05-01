@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ExistingCustomers from "./pages/ExistingCustomers";
 import CombinedLanding from "./pages/CombinedLanding";
+import WebinarRegistrationForm from "./components/webinar/WebinarRegistrationForm";
+import StartFreeTrial from "./pages/StartFreeTrial";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/existing-customers" element={<ExistingCustomers />} />
           <Route path="/combined" element={<CombinedLanding />} />
+          <Route path="/webinar" element={<WebinarRegistrationForm />} />
+          <Route path="/start-free-trail" element={<StartFreeTrial />} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

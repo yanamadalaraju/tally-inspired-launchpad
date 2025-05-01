@@ -90,9 +90,12 @@ const FeatureSection = () => {
                     Start streamlining your operations and boost productivity today with our comprehensive solution.
                   </p>
                 </div>
-                <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
-                  Start Your Free Trial
-                </button>
+                <a href="/start-free-trail">
+  <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+    Start Your Free Trial
+  </button>
+</a>
+
               </div>
             </div>
           </div>

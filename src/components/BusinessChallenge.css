@@ -1,0 +1,28 @@
+/* Keyframe animation for continuous movement */
+/* @keyframes moveLeft {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-move-left {
+    animation: moveLeft 15s linear infinite;
+  } */
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 1s ease-out forwards;
+  }
+  

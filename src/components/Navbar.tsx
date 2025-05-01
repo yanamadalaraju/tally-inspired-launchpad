@@ -3,6 +3,8 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from '../assets/tally-logo-black.svg'; // or './assets/logo.png' based on your file structure
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -10,9 +12,17 @@ const Navbar = () => {
   return (
     <nav className="bg-white shadow-sm fixed w-full z-10">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center">
-          <Link to="/" className="text-primary font-bold text-xl hover:text-primary/80 transition-colors">BizManager</Link>
-        </div>
+      <div className="flex items-center">
+  <Link to="/">
+    <img
+      src={logo}
+      alt="BizManager Logo"
+      className="h-10 w-30 object-contain hover:scale-105 transition-transform duration-300"
+    />
+  </Link>
+</div>
+
+
         
         <div className="hidden md:flex space-x-6">
           <a href="#features" className="text-gray-600 hover:text-primary transition-colors">Features</a>

@@ -1,0 +1,37 @@
+@keyframes slide {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-slide {
+    animation: slide 20s linear infinite;
+  }
+  
+/* animations.css */
+/* Slide Up */
+.slide-up {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.5s ease;
+  }
+  
+  /* Initial Hidden State */
+  .form-hidden {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  
+  /* Shake Animation */
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+  
+  .shake {
+    animation: shake 0.4s ease-in-out;
+  }

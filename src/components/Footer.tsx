@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/tally-logo-white.svg'; // or './assets/logo.png' based on your file structure
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,7 +11,15 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold text-xl mb-4">BizManager</h3>
+          <div className="flex items-center">
+  <Link to="/">
+    <img
+      src={logo}
+      alt="BizManager Logo"
+      className="h-20 w-50 object-contain hover:scale-105 transition-transform duration-300"
+    />
+  </Link>
+</div>
             <p className="text-gray-400 mb-4">
               The complete business management solution for your growing enterprise.
             </p>
@@ -69,7 +78,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">&copy; {currentYear} BizManager. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">&copy; {currentYear} Tally Solutions Private Limited. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors">Terms of Service</a>
