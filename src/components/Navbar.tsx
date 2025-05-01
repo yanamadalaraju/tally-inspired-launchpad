@@ -37,7 +37,7 @@ const Navbar = () => {
               Log In
             </Button>
           </Link>
-          <Link to="/combined">
+          <Link to="/start-free-trail">
             <Button className="bg-secondary hover:bg-secondary-light text-white transition-all duration-300 transform hover:scale-105">
               Start Free Trial
             </Button>

@@ -3,6 +3,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Button } from "@/components/ui/button";
+import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart2, Download, BookOpen, MessageSquare, RefreshCw, FileText, Users, Shield } from "lucide-react";
 
@@ -27,7 +28,33 @@ const ExistingCustomers = () => {
       label: "Updated"
     }
   ];
-
+  
+  const trainingResources = [
+    {
+      title: 'Getting Started with TallyPrime',
+      duration: '1 hour',
+      level: 'Beginner',
+      image: 'https://images.pexels.com/photos/4050315/pexels-photo-4050315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    },
+    {
+      title: 'Advanced Financial Management',
+      duration: '2 hours',
+      level: 'Intermediate',
+      image: 'https://images.pexels.com/photos/7681094/pexels-photo-7681094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    },
+    {
+      title: 'Inventory & Stock Management',
+      duration: '1.5 hours',
+      level: 'Intermediate',
+      image: 'https://images.pexels.com/photos/7821573/pexels-photo-7821573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    },
+    {
+      title: 'Tax Compliance & Filing',
+      duration: '2 hours',
+      level: 'Advanced',
+      image: 'https://images.pexels.com/photos/6693661/pexels-photo-6693661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+    }
+  ];
   const resources = [
     {
       title: "Advanced User Training",
@@ -181,6 +208,114 @@ const ExistingCustomers = () => {
           </div>
         </div>
       </section>
+
+      {/* Training Resources Section */}
+      <section className="py-20 mt-[40px] bg-[#F7FAFC] rounded-2xl">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ScrollAnimateWrapper animation="fade-up">
+      <div className="text-center mb-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-[rgb(43, 83, 97)] mb-4">
+          Learn & Grow with TallyPrime
+        </h2>
+        <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+          Master TallyPrime with expert-led tutorials, quick guides, and certification courses designed for businesses and professionals.
+        </p>
+      </div>
+    </ScrollAnimateWrapper>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {trainingResources.map((resource, index) => (
+        <ScrollAnimateWrapper 
+          key={index} 
+          animation="fade-up" 
+          delay={index * 100}
+        >
+          <div className="bg-white rounded-xl shadow-md overflow-hidden h-full">
+            <div className="relative h-48">
+              <img 
+                src={resource.image} 
+                alt={resource.title} 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                <div className="p-4 text-white">
+                  <div className="flex space-x-2 mb-2">
+                    <span className="px-2 py-1 bg-[#1AC8A6] text-xs rounded-md">
+                      {resource.duration}
+                    </span>
+                    <span className="px-2 py-1 bg-gray-700 text-xs rounded-md">
+                      {resource.level}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-semibold">{resource.title}</h3>
+                </div>
+              </div>
+            </div>
+            <div className="p-4">
+              <a 
+                href="#" 
+                className="text-[#1AC8A6] font-medium hover:text-[#17b09a] flex items-center"
+              >
+                Watch Now
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </ScrollAnimateWrapper>
+      ))}
+    </div>
+
+    <ScrollAnimateWrapper animation="fade-up" delay={400}>
+      <div className="mt-12 text-center">
+        <Button
+          size="lg"
+          className="bg-[#1AC8A6] hover:bg-[#17b09a] text-[#0B2C4D] font-semibold px-6 py-3 rounded-full shadow-md transition-all"
+        >
+          Explore Training Center
+        </Button>
+      </div>
+    </ScrollAnimateWrapper>
+  </div>
+</section>
+
+<section className="py-20 bg-gradient-to-r from-primary to-primary-light text-white shadow-inner mb-10">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ScrollAnimateWrapper animation="fade-up">
+      <div className="text-center">
+        <div className="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm font-medium mb-4">
+          Premium Upgrade
+        </div>
+        <h2 className="text-4xl md:text-5xl font-extrabold mb-5 leading-tight">
+          Ready to ✳ Upgrade Your TallyPrime?
+        </h2>
+        <p className="text-lg md:text-xl mb-10 text-white/80 max-w-3xl mx-auto">
+          Experience faster workflows, smarter tools, and exclusive capabilities. Upgrade now and stay ahead with the latest version of TallyPrime.
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+          <Button 
+            size="lg" 
+            className="bg-secondary hover:bg-secondary-light text-white font-medium px-6 py-3 rounded-full shadow-lg transition-all duration-200"
+          >
+            Explore Upgrade Options
+          </Button>
+          <Button 
+            variant="outline" 
+            size="lg" 
+            className="border-white text-white hover:bg-white/20 hover:border-white px-6 py-3 rounded-full transition-all duration-200"
+            style={{ borderColor: '#ffffff', color: 'rgb(7, 7, 7)' }} // Ensures white text and border color
+          >
+            View New Features
+          </Button>
+        </div>
+      </div>
+    </ScrollAnimateWrapper>
+  </div>
+</section>
+
+
+
 
       <Footer />
     </div>

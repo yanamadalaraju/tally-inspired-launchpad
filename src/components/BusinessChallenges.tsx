@@ -141,6 +141,8 @@ import {
   Database 
 } from "lucide-react";
 import './BusinessChallenge.css';
+import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
+import TestimonialCard from './TestimonialCard';
 
 const BusinessChallenges = () => {
   const challenges = [
@@ -150,6 +152,29 @@ const BusinessChallenges = () => {
     "Are you filing your GST returns correctly?",
     "Are you tracking your sales team's performance?",
     "Are you matching your bank book with actual transactions?"
+  ];
+  const testimonials = [
+    {
+      quote: "TallyPrime Solutions transformed our accounting processes. We've reduced month-end closing time by 65% and improved financial accuracy significantly.",
+      author: "Rajesh Kumar",
+      position: "CFO",
+      company: "Sunrise Industries",
+      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600",
+    },
+    {
+      quote: "As a growing retail business, inventory management was our biggest challenge. TallyPrime's integrated solution has given us complete visibility and control.",
+      author: "Priya Sharma",
+      position: "Operations Director",
+      company: "Urban Retail Group",
+      image: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=600",
+    },
+    {
+      quote: "The tax compliance features alone saved us thousands in potential penalties. TallyPrime keeps us updated with the latest regulatory changes automatically.",
+      author: "Vikram Singh",
+      position: "Managing Director",
+      company: "Global Exports Ltd",
+      image: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=600",
+    }
   ];
 
   const benefits = [
@@ -281,7 +306,7 @@ const BusinessChallenges = () => {
   </div>
 
   {/* New Section: Testimonials */}
-  <div className="text-center mt-8 animate-slide-up">
+  {/* <div className="text-center mt-8 animate-slide-up">
   <h4 className="text-xl font-semibold text-primary mb-4">What Our Users Say:</h4>
   <div className="space-y-4">
     <div className="flex justify-center items-center space-x-6">
@@ -295,9 +320,54 @@ const BusinessChallenges = () => {
       </div>
     </div>
   </div>
-</div>
+</div> */}
 
 </div>
+
+<section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollAnimateWrapper animation="fade-up">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What Our Customers Say
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Thousands of businesses rely on TallyPrime Solutions to streamline their operations and drive growth.
+              </p>
+            </div>
+          </ScrollAnimateWrapper>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <ScrollAnimateWrapper 
+                key={index} 
+                animation="fade-up" 
+                delay={index * 100}
+                className="h-full"
+              >
+                <TestimonialCard
+                  quote={testimonial.quote}
+                  author={testimonial.author}
+                  position={testimonial.position}
+                  company={testimonial.company}
+                  image={testimonial.image}
+                />
+              </ScrollAnimateWrapper>
+            ))}
+          </div>
+          
+          <ScrollAnimateWrapper animation="fade-up" delay={300}>
+            <div className="mt-16 text-center">
+              <p className="text-xl text-gray-700 font-semibold mb-8">
+                Join 2,000,000+ satisfied businesses using TallyPrime Solutions
+              </p>
+              <Button size="lg">
+                Read Success Stories
+              </Button>
+            </div>
+          </ScrollAnimateWrapper>
+        </div>
+      </section>
 
 
 
