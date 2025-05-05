@@ -320,7 +320,7 @@ const HeroSection = () => {
           </div>
 
           {/* Right - Form */}
-          <div className="md:w-1/2" ref={formRef}>
+          <div className="md:w-1/2" ref={formRef} id="formSection" >
             <div className={`bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-auto text-gray-800 ${shakeForm ? 'shake-form' : ''}`}>
               {!formSubmitted ? (
                 <>
