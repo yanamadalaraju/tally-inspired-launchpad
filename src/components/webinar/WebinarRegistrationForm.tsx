@@ -460,7 +460,7 @@ const WebinarRegistrationForm = () => {
                   <Input
                     id="phone"
                     name="phone"
-                    placeholder="(123) 456-7890"
+                    placeholder="123-456-7890"
                     value={formState.phone}
                     onChange={handleChange}
                     required

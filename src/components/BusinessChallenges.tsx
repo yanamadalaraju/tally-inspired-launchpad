@@ -143,6 +143,10 @@ import {
 import './BusinessChallenge.css';
 import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
 import TestimonialCard from './TestimonialCard';
+import Image1  from '../assets/conveyor-belt-warehouse.avif';
+import Image2  from '../assets/accounting-software.webp';
+import Image3  from '../assets/isometric.avif';
+import Image4  from '../assets/unlock-new-opportunities.svg';
 
 const BusinessChallenges = () => {
   const challenges = [
@@ -212,38 +216,71 @@ const BusinessChallenges = () => {
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         {/* Intro */}
-        <div className="max-w-4xl mx-auto text-center mb-8 p-3 md:p-4 rounded-xl bg-gradient-to-br from-white via-gray-50 to-gray-100 shadow-md animate-fade-in">
-  <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3 animate-slide-up">
-    What is Business?
-  </h2>
-  <p className="text-sm md:text-base text-gray-700 mb-3">
-    Yes, business is about buying and selling a product or service — but that's just the beginning. The real challenge lies in managing what happens after the sale.
-  </p>
-
-  {/* Challenges List */}
-  <div className="bg-white p-3 md:p-4 rounded-xl shadow-lg my-4">
-    <p className="text-base font-semibold text-secondary mb-3">Ask yourself:</p>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-      {challenges.map((challenge, index) => (
-        <div
-          key={index}
-          className="flex items-start gap-2 p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-200 animate-fade-in"
-          style={{ animationDelay: `${index * 0.1}s` }}
-        >
-          <span className="text-green-500 text-lg mt-1">✅</span>
-          <span className="text-gray-800 text-left text-sm md:text-base">{challenge}</span>
-        </div>
-      ))}
-    </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 px-4">
+  {/* Left Images */}
+  <div className="hidden md:flex flex-col w-1/6 gap-4">
+    <img
+      src={Image1}
+      alt="Left Illustration Top"
+      className="w-full h-auto rounded-lg"
+    />
+    <img
+      src={Image3} // New image below
+      alt="Left Illustration Bottom"
+      className="w-full h-auto rounded-lg"
+    />
   </div>
 
-  <p className="text-sm md:text-base text-gray-800 mt-3 font-medium">
-    If any of these questions make you think twice, then it’s time to level up.
-  </p>
-  <p className="text-sm md:text-base text-gray-800 mt-1">
-    Don’t worry — there's a solution trusted by over <span className="font-semibold text-primary">2.5 million businesses</span>!
-  </p>
+  {/* Center Content Card */}
+  <div className="max-w-4xl mx-auto text-center mb-8 p-3 md:p-4 rounded-xl bg-gradient-to-br from-white via-gray-50 to-gray-100 shadow-md animate-fade-in flex-1">
+    <h2 className="text-2xl md:text-3xl font-bold text-primary mb-3 animate-slide-up">
+      What is Business?
+    </h2>
+    <p className="text-sm md:text-base text-gray-700 mb-3">
+      Yes, business is about buying and selling a product or service — but that's just the beginning. The real challenge lies in managing what happens after the sale.
+    </p>
+
+    {/* Challenges List */}
+    <div className="bg-white p-3 md:p-4 rounded-xl shadow-lg my-4">
+      <p className="text-base font-semibold text-secondary mb-3">Ask yourself:</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        {challenges.map((challenge, index) => (
+          <div
+            key={index}
+            className="flex items-start gap-2 p-3 bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition duration-200 animate-fade-in"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
+            <span className="text-green-500 text-lg mt-1">✅</span>
+            <span className="text-gray-800 text-left text-sm md:text-base">{challenge}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p className="text-sm md:text-base text-gray-800 mt-3 font-medium">
+      If any of these questions make you think twice, then it’s time to level up.
+    </p>
+    <p className="text-sm md:text-base text-gray-800 mt-1">
+      Don’t worry — there's a solution trusted by over <span className="font-semibold text-primary">2.5 million businesses</span>!
+    </p>
+  </div>
+
+  {/* Right Images */}
+  <div className="hidden md:flex flex-col w-1/6 gap-4">
+    <img
+      src={Image2}
+      alt="Right Illustration Top"
+      className="w-full h-auto rounded-lg"
+    />
+    <img
+      src={Image4} // New image below
+      alt="Right Illustration Bottom"
+      className="w-full h-36 rounded-lg"
+    />
+  </div>
 </div>
+
+
 
 
 

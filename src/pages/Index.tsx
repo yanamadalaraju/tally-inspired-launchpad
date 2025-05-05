@@ -89,9 +89,9 @@ const Index = () => {
             className="w-full h-auto"
           />
           <div className="absolute inset-0 bg-blue-900 bg-opacity-30 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-white bg-opacity-80 flex items-center justify-center cursor-pointer hover:bg-opacity-100 transition-all">
+            {/* <div className="w-16 h-16 rounded-full bg-white bg-opacity-80 flex items-center justify-center cursor-pointer hover:bg-opacity-100 transition-all">
               <div className="w-0 h-0 border-t-8 border-t-transparent border-l-14 border-l-blue-700 border-b-8 border-b-transparent ml-1"></div>
-            </div>
+            </div> */}
           </div>
         </div>
       </ScrollAnimateWrapper>

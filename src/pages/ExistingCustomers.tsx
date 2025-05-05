@@ -5,7 +5,8 @@ import Footer from '../components/Footer';
 import { Button } from "@/components/ui/button";
 import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart2, Download, BookOpen, MessageSquare, RefreshCw, FileText, Users, Shield } from "lucide-react";
+import { BarChart2, Download, BookOpen, MessageSquare, RefreshCw, FileText, Users, Shield, Award, Star } from "lucide-react";
+import RequestDemoForm from '@/components/RequestDemoForm';
 
 const ExistingCustomers = () => {
   const updateFeatures = [
@@ -61,7 +62,7 @@ const ExistingCustomers = () => {
       description: "Master the latest features with our comprehensive training sessions designed for existing users.",
       date: "Every Tuesday",
       icon: <BookOpen className="h-8 w-8 text-primary" />,
-      link: "#"
+      link: "#RequestDemoForm"
     },
     {
       title: "Monthly Update Webinar",
@@ -164,7 +165,7 @@ const ExistingCustomers = () => {
                   <p className="text-gray-600">{feature.description}</p>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" className="w-full">Learn More</Button>
+                  {/* <Button variant="outline" className="w-full">Learn More</Button> */}
                 </CardFooter>
               </Card>
             ))}
@@ -193,7 +194,7 @@ const ExistingCustomers = () => {
                   <p className="text-sm text-secondary font-medium mb-3">{resource.date}</p>
                   <p className="text-gray-600 mb-6">{resource.description}</p>
                   <a 
-                    href={resource.link} 
+                    href="#request-demo" 
                     className="text-secondary hover:text-secondary-light font-medium flex items-center"
                   >
                     Register Now <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
@@ -280,7 +281,7 @@ const ExistingCustomers = () => {
   </div>
 </section>
 
-<section className="py-20 bg-gradient-to-r from-primary to-primary-light text-white shadow-inner mb-10">
+<section className="py-20 bg-gradient-to-r from-primary to-primary-light text-white shadow-inner ">
   <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <ScrollAnimateWrapper animation="fade-up">
       <div className="text-center">
@@ -314,6 +315,41 @@ const ExistingCustomers = () => {
   </div>
 </section>
 
+<section className="py-20 bg-blue-700" id="request-demo">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <ScrollAnimateWrapper animation="fade-right">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                  Ready to Transform Your Business?
+                </h2>
+                <p className="text-xl text-blue-100 mb-8">
+                  Join thousands of businesses that have improved their operations with TallyPrime. Schedule a personalized demo today and see how we can help you grow.
+                </p>
+                <div className="flex flex-wrap items-center space-x-2 space-y-2 sm:space-y-0 mb-8">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} className="h-6 w-6 text-yellow-400 fill-yellow-400" />
+                  ))}
+                  <span className="text-white font-semibold ml-2">
+                    4.8/5 from 1,000+ reviews
+                  </span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Award className="h-12 w-12 text-yellow-400" />
+                  <div>
+                    <p className="text-white font-semibold text-lg">Top Rated 2025</p>
+                    <p className="text-blue-100">Business Management Software</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollAnimateWrapper>
+            
+            <ScrollAnimateWrapper animation="fade-left">
+              <RequestDemoForm />
+            </ScrollAnimateWrapper>
+          </div>
+        </div>
+      </section>
 
 
 

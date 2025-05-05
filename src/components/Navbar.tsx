@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from '../assets/tally-logo-black.svg'; // or './assets/logo.png' based on your file structure
+import logo from '../assets/mcrlogo.jpg'; // or './assets/logo.png' based on your file structure
 
 
 const Navbar = () => {
@@ -17,7 +17,7 @@ const Navbar = () => {
     <img
       src={logo}
       alt="BizManager Logo"
-      className="h-10 w-30 object-contain hover:scale-105 transition-transform duration-300"
+      className="h-10 w-60 object-contain hover:scale-105 transition-transform duration-300"
     />
   </Link>
 </div>

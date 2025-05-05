@@ -19,14 +19,14 @@ const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
             <a href="#webinar">
   <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium group transition-all duration-300 transform hover:scale-105 pulse-button">
-    Register for Free Webinar
+    Go for Free Webinar
     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
   </Button>
 </a>
 
               <Link to="/start-free-trail">
                 <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white group transition-all duration-300">
-                  Start Free Trial
+                  Go For Free Trial
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

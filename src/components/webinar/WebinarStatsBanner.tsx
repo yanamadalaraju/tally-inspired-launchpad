@@ -41,7 +41,7 @@ const WebinarStatsBanner = () => {
             Limited to 100 Attendees Only
           </h4>
           <p className="text-gray-600 text-sm">
-            Our exclusive webinars fill up rapidly. Register now to get priority access and receive a complimentary business assessment worth $299 – even if you can't attend live.
+            Our exclusive webinars fill up rapidly. Register now to get priority access and receive a complimentary business assessment worth ₹19549 – even if you can't attend live.
           </p>
         </div>
       </div>

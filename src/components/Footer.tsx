@@ -2,6 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/tally-logo-white.svg'; // or './assets/logo.png' based on your file structure
+import { Award, BadgeCheck, Facebook, FacebookIcon, Globe2, Instagram, Linkedin, Mail, MapPin, Phone, Smile, Users, Youtube } from 'lucide-react';
+
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,7 +13,8 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
+  <h6 className="text-4xl font-bold text-white">MCR</h6>
   <Link to="/">
     <img
       src={logo}
@@ -20,6 +23,7 @@ const Footer = () => {
     />
   </Link>
 </div>
+
             <p className="text-gray-400 mb-4">
               The complete business management solution for your growing enterprise.
             </p>
@@ -47,7 +51,7 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+            <h3 className="font-bold text-lg mb-4">🔗 Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="text-gray-400 hover:text-secondary transition-colors">Home</Link></li>
               <li><Link to="/existing-customers" className="text-gray-400 hover:text-secondary transition-colors">Existing Customers</Link></li>
@@ -57,7 +61,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4">Products</h3>
+            <h3 className="font-bold text-lg mb-4">🛒 Products</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Accounting Software</a></li>
               <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">GST Software</a></li>
@@ -67,7 +71,7 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="font-bold text-lg mb-4">Support</h3>
+            <h3 className="font-bold text-lg mb-4">💬 Support</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Help Center</a></li>
               <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Contact Support</a></li>
@@ -76,9 +80,104 @@ const Footer = () => {
               <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">FAQs</a></li>
             </ul>
           </div>
+          <div>
+  <h3 className="font-bold text-lg mb-4">🖥️ Services</h3>
+  <ul className="space-y-2">
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Tally Installation & Setup</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">GST Configuration</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Company Data Migration</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Custom Tally Reports</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Tally On Cloud</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">AMC & Support Services</a></li>
+    <li><a href="#" className="text-gray-400 hover:text-secondary transition-colors">Tally Training & Workshops</a></li>
+  </ul>
+</div>
+
+<div>
+  <h3 className="font-bold text-lg mb-4">🧑‍💼 Why Choose Us</h3>
+  <ul className="space-y-2">
+    <li className="flex items-start">
+      <BadgeCheck size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">25+ Years of Experience</a>
+    </li>
+    <li className="flex items-start">
+      <Award size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Authorized Tally Partner</a>
+    </li>
+    <li className="flex items-start">
+      <Users size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Certified Tally Experts</a>
+    </li>
+    <li className="flex items-start">
+      <Globe2 size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Pan India Support</a>
+    </li>
+    <li className="flex items-start">
+      <Smile size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Client-Centric Approach</a>
+    </li>
+  </ul>
+</div>
+
+<div>
+  <h3 className="font-bold text-lg mb-4">📰 Latest News / Updates</h3>
+  <ul className="space-y-2">
+    <li>
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">TallyPrime 4.0 Released</a>
+    </li>
+    <li>
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Budget 2025: GST Changes</a>
+    </li>
+    <li>
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Tally & E-Invoicing Explained</a>
+    </li>
+    <li>
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Upcoming Training Webinars</a>
+    </li>
+    <li>
+      <a href="#" className="text-gray-400 hover:text-secondary transition-colors">Client Success Stories</a>
+    </li>
+  </ul>
+</div>
+
+
+
+<div>
+  <h3 className="font-bold text-lg mb-4">🌐 Contact Us</h3>
+  <ul className="space-y-2">
+    <li className="flex items-start">
+      <MapPin size={18} className="mr-2 mt-1 flex-shrink-0 text-secondary" />
+      <span>No.660, 1st Floor, 1st B Main Road, Jayanagar 8 Block, BANGALORE - 560070</span>
+    </li>
+    <li className="flex items-center">
+      <Phone size={18} className="mr-2 flex-shrink-0 text-secondary" />
+      <span>+91 9964740243</span>
+    </li>
+    <li className="flex items-center">
+      <Mail size={18} className="mr-2 flex-shrink-0 text-secondary" />
+      <span>sales@mcrindia.in</span>
+    </li>
+    <li className="flex items-center space-x-4 mt-2">
+      <a href="https://www.facebook.com/mcrindia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-colors">
+        <FacebookIcon size={18} />
+      </a>
+      <a href="https://www.instagram.com/mcrindia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-colors">
+        <Instagram size={18} />
+      </a>
+      <a href="https://www.linkedin.com/company/mcrindia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-colors">
+        <Linkedin size={18} />
+      </a>
+      <a href="https://www.youtube.com/mcrindia" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-secondary transition-colors">
+        <Youtube size={18} />
+      </a>
+    </li>
+  </ul>
+</div>
+
+
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">&copy; {currentYear} Tally Solutions Private Limited. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">&copy; {currentYear} MCRT Software Indian Private Limited. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-secondary text-sm transition-colors">Terms of Service</a>
