@@ -73,21 +73,7 @@ const WebinarForm = () => {
         
         {/* Top Centered Benefits Section with reduced spacing */}
         {/* Top Centered Benefits Section with reduced spacing */}
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 pt-4 mb-8">
-  {/* Webinar Benefits */}
-  <div className="w-full max-w-2xl">
-    <WebinarBenefits benefits={webinarBenefits} />
-  </div>
-
-  {/* Webinar Image */}
-  <div className="w-full lg:w-1/3 flex justify-center pt-6 lg:pt-10 lg:mt-0 lg:ml-10 lg:mr-10">
-    <img
-      src={Image} // Replace with your image path
-      alt="Webinar"
-      className="w-72 h-60 md:w-80 md:h-72 lg:w-96 lg:h-80 rounded-lg shadow-lg object-cover"
-    />
-  </div>
-</div>
+        
 
 
 
@@ -113,6 +99,22 @@ const WebinarForm = () => {
             <WebinarStatsBanner />
           </div>
         </div>
+
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-8 pt-4 mb-8">
+  {/* Webinar Benefits */}
+  <div className="w-full max-w-2xl">
+    <WebinarBenefits benefits={webinarBenefits} />
+  </div>
+
+  {/* Webinar Image */}
+  <div className="w-full lg:w-1/3 flex justify-center pt-6 lg:pt-10 lg:mt-0 lg:ml-10 lg:mr-10">
+    <img
+      src={Image} // Replace with your image path
+      alt="Webinar"
+      className="w-72 h-60 md:w-80 md:h-72 lg:w-96 lg:h-80 rounded-lg shadow-lg object-cover"
+    />
+  </div>
+</div>
       </div>
     </section>
   );

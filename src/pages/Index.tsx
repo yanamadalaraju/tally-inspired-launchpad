@@ -11,6 +11,8 @@ import Footer from '../components/Footer';
 import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
 import FeatureCard from '@/components/FeatureCard';
 import { Button } from 'react-day-picker';
+import GrowthSection from '@/components/GrowthSection';
+import growthImage from '../assets/engagement_feature.jpg'
 
 const Index = () => {
   const features = [
@@ -50,6 +52,9 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <ValueProposition />
+      <div>
+      <GrowthSection imageUrl={growthImage} />
+    </div>
       <FeatureSection />
       {/* Product Screenshot Section */}
 <section className="py-20 bg-white">

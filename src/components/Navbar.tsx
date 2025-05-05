@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from '../assets/mcrlogo.jpg'; // or './assets/logo.png' based on your file structure
+import logo from '../assets/Mcrt-logo.jpg'; // or './assets/logo.png' based on your file structure
 
 
 const Navbar = () => {
