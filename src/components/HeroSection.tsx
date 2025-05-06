@@ -229,6 +229,230 @@
 // };
 
 // export default HeroSection;
+// import React, { useState, useRef } from 'react';
+// import { Button } from "@/components/ui/button";
+// import { ArrowRight } from "lucide-react";
+// import { Link } from "react-router-dom";
+// import './HeroSection.css';
+
+// const HeroSection = () => {
+//   const formRef = useRef(null);
+//   const [formSubmitted, setFormSubmitted] = useState(false);
+//   const [shakeForm, setShakeForm] = useState(false);
+//   const [formData, setFormData] = useState({
+//     role: '',
+//     name: '',
+//     phone: '',
+//     email: '',
+//     pincode: '',
+//     consent: false,
+//   });
+
+//   const handleFormShake = () => {
+//     setShakeForm(true);
+//     setTimeout(() => {
+//       setShakeForm(false);
+//     }, 500);
+//   };
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({
+//       ...formData,
+//       [name]: value,
+//     });
+//   };
+
+//   const handleCheckboxChange = (e) => {
+//     setFormData({
+//       ...formData,
+//       consent: e.target.checked,
+//     });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+
+//     if (formData.role && formData.name && formData.phone && formData.email && formData.pincode && formData.consent) {
+//       try {
+//         const response = await fetch('http://localhost:5000/submit-form', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify(formData),
+//         });
+
+//         if (response.ok) {
+//           setFormSubmitted(true);
+//         } else {
+//           alert('Error submitting form. Please try again.');
+//         }
+//       } catch (error) {
+//         console.error('Error submitting form:', error);
+//         alert('Error submitting form. Please try again.');
+//       }
+//     } else {
+//       handleFormShake();
+//     }
+//   };
+
+//   return (
+//     <section className="pt-20 pb-16 bg-gradient-to-br from-[#0f172a] to-[#1e3a8a] text-white overflow-hidden">
+//       <div className="container mx-auto px-4 max-w-6xl">
+//         <div className="flex flex-col-reverse md:flex-row items-center gap-10">
+
+//           {/* Left */}
+//           <div className="md:w-1/2 text-center md:text-left">
+//             <h1 className="text-3xl md:text-4xl font-bold leading-snug mb-3">
+//               What is Business?
+//             </h1>
+//             <p className="text-base text-slate-300 mb-5">
+//               Yes, business is about buying and selling — but the real challenge begins after the sale.
+//             </p>
+
+//             <ul className="text-sm md:text-base space-y-2 mb-5">
+//               {[
+//                 "collecting payments on time?",
+//                 "suppliers being paid properly?",
+//                 "managing your stock efficiently?",
+//                 "filing your GST returns accurately?",
+//                 "effectively tracking your sales team's performance?",
+//                 "reconciling your bank book with actual transactions?"
+//               ].map((item, idx) => (
+//                 <li key={idx} className="flex items-start gap-2">
+//                   <span className="text-green-400">✅</span>
+//                   <span className="text-white">
+//                     {item === "suppliers being paid properly?"
+//                       ? <>Are your <span className="font-medium underline">{item}</span></>
+//                       : <>Are you <span className="font-medium underline">{item}</span></>
+//                     }
+//                   </span>
+//                 </li>
+//               ))}
+//             </ul>
+
+//             <p className="text-slate-200 text-sm md:text-base leading-relaxed mb-6">
+//               <span className="text-white text-base font-semibold block mb-1">🤔 Still unsure?</span>
+//               If these questions make you pause, it's <span className="font-semibold text-white underline decoration-wavy">time to level up</span>.
+//               <br />
+//               <span className="mt-2 inline-block bg-gradient-to-r from-yellow-300 via-pink-500 to-red-500 text-transparent bg-clip-text font-bold text-base">
+//                 💡 Don’t worry — there's a Solution Trusted by 2.5M+ businesses!
+//               </span>
+//             </p>
+
+//             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start overflow-hidden">
+//               {!formSubmitted && (
+//                 <button onClick={handleFormShake}>
+//                   <Button className="group relative overflow-hidden border-2 border-transparent bg-white text-blue-700 font-semibold px-6 py-3 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 ml-10">
+//                     <span className="absolute inset-0 z-0 bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 opacity-10 blur-md group-hover:opacity-30 transition-opacity duration-500 rounded-2xl"></span>
+//                     <span className=" flex items-center gap-2 overflow-hidden">
+//                       <ArrowRight className="h-5 w-5" />
+//                       Register For Free Webinar
+//                     </span>
+//                   </Button>
+//                 </button>
+//               )}
+//             </div>
+//           </div>
+
+//           {/* Right - Form */}
+//           <div className="md:w-1/2" ref={formRef} id="formSection">
+//             <div className={`bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-auto text-gray-800 ${shakeForm ? 'shake-form' : ''}`}>
+//               {!formSubmitted ? (
+//                 <>
+//                   <h2 className="text-xl font-bold text-center mb-1 text-blue-700">
+//                     🚀 Take the First Step Toward Smarter Business Growth
+//                   </h2>
+//                   <p className="text-xs text-center text-gray-500 mb-4">
+//                     No credit card required. Instant access.
+//                   </p>
+//                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
+                    
+//                     <select
+//                       required
+//                       name="role"
+//                       value={formData.role}
+//                       onChange={handleInputChange}
+//                       className="block w-full px-3 py-2 rounded border border-gray-300 appearance-none"
+//                     >
+//                       <option value="" disabled>I am *</option>
+//                       <option value="business">Business Owner</option>
+//                       <option value="accountant">Accountant</option>
+//                       <option value="student">Student</option>
+//                       <option value="others">Others</option>
+//                     </select>
+
+//                     <input
+//                       type="text"
+//                       required
+//                       name="name"
+//                       placeholder="Name *"
+//                       value={formData.name}
+//                       onChange={handleInputChange}
+//                       className="block w-full px-3 py-2 rounded border border-gray-300"
+//                     />
+//                     <input
+//                       type="tel"
+//                       required
+//                       name="phone"
+//                       placeholder="Phone *"
+//                       value={formData.phone}
+//                       onChange={handleInputChange}
+//                       className="block w-full px-3 py-2 rounded border border-gray-300"
+//                     />
+//                     <input
+//                       type="email"
+//                       required
+//                       name="email"
+//                       placeholder="Email *"
+//                       value={formData.email}
+//                       onChange={handleInputChange}
+//                       className="block w-full px-3 py-2 rounded border border-gray-300"
+//                     />
+//                     <input
+//                       type="text"
+//                       required
+//                       name="pincode"
+//                       placeholder="Pincode *"
+//                       value={formData.pincode}
+//                       onChange={handleInputChange}
+//                       className="block w-full px-3 py-2 rounded border border-gray-300"
+//                     />
+//                     <label className="flex items-start text-xs text-gray-600 space-x-2">
+//                       <input
+//                         type="checkbox"
+//                         required
+//                         className="mt-1 accent-blue-600"
+//                         checked={formData.consent}
+//                         onChange={handleCheckboxChange}
+//                       />
+//                       <span>I agree to receive updates, offers & helpful insights on growing my business smarter.</span>
+//                     </label>
+//                     <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Register</button>
+//                   </form>
+//                 </>
+//               ) : (
+//                 <div className="text-center py-10 text-gray-700">
+//                   <h2 className="text-lg font-bold text-green-600 mb-2">✅ You're All Set!</h2>
+//                   <p className="mb-3">Your account is now active and ready to use.</p>
+//                   <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded text-sm mb-3">
+//                     Check your inbox for login details.
+//                   </div>
+//                   <p className="text-xs">Need help? Visit our <a href="/help-docs" className="text-blue-600 underline">Help Center</a>.</p>
+//                 </div>
+//               )}
+//             </div>
+//           </div>
+
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default HeroSection;
+
 import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
@@ -239,6 +463,14 @@ const HeroSection = () => {
   const formRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [shakeForm, setShakeForm] = useState(false);
+  const [formData, setFormData] = useState({
+    role: '',
+    name: '',
+    phone: '',
+    email: '',
+    pincode: '',
+    consent: false,
+  });
 
   const handleFormShake = () => {
     setShakeForm(true);
@@ -247,9 +479,46 @@ const HeroSection = () => {
     }, 500);
   };
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      consent: e.target.checked,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormSubmitted(true);
+
+    if (formData.role && formData.name && formData.phone && formData.email && formData.pincode && formData.consent) {
+      try {
+        const response = await fetch('http://localhost:5000/submit-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (response.ok) {
+          setFormSubmitted(true);
+        } else {
+          alert('Error submitting form. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Error submitting form. Please try again.');
+      }
+    } else {
+      handleFormShake();
+    }
   };
 
   return (
@@ -266,26 +535,34 @@ const HeroSection = () => {
               Yes, business is about buying and selling — but the real challenge begins after the sale.
             </p>
 
-            <ul className="text-sm md:text-base space-y-2 mb-5">
-              {[
-                "collecting payments on time?",
-                "suppliers being paid properly?",
-                "managing your stock efficiently?",
-                "filing your GST returns accurately?",
-                "effectively tracking your sales team's performance?",
-                "reconciling your bank book with actual transactions?"
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <span className="text-green-400">✅</span>
-                  <span className="text-white">
-                    {item === "suppliers being paid properly?"
-                      ? <>Are your <span className="font-medium underline">{item}</span></>
-                      : <>Are you <span className="font-medium underline">{item}</span></>
-                    }
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <ul className="text-sm md:text-base space-y-3 mb-5">
+  {[
+    "collecting payments on time?",
+    "suppliers being paid properly?",
+    "managing your stock efficiently?",
+    "filing your GST returns accurately?",
+    "effectively tracking your sales team's performance?",
+    "reconciling your bank book with actual transactions?",
+  ].map((item, idx) => (
+    <li
+      key={idx}
+      className="flex items-start gap-2 sm:gap-3 md:gap-3 lg:gap-4 flex-wrap"
+    >
+      <span className="text-green-400">✅</span>
+      <span className="text-white">
+        {item === "suppliers being paid properly?"
+          ? (
+            <>Are your <span className="font-medium underline">{item}</span></>
+          )
+          : (
+            <>Are you <span className="font-medium underline">{item}</span></>
+          )}
+      </span>
+    </li>
+  ))}
+</ul>
+
+
 
             <p className="text-slate-200 text-sm md:text-base leading-relaxed mb-6">
               <span className="text-white text-base font-semibold block mb-1">🤔 Still unsure?</span>
@@ -308,16 +585,6 @@ const HeroSection = () => {
                   </Button>
                 </button>
               )}
-
-              {/* <Link to="/start-free-trial">
-                <Button className="group relative overflow-hidden border-2 border-transparent bg-white text-purple-700 font-semibold px-6 py-3 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700">
-                  <span className="absolute inset-0 z-0 bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500 opacity-10 blur-md group-hover:opacity-30 transition-opacity duration-500 rounded-2xl"></span>
-                  <span className="relative z-10 flex items-center gap-2">
-                    <ArrowRight className="h-5 w-5" />
-                    Start Free Trial
-                  </span>
-                </Button>
-              </Link> */}
             </div>
           </div>
 
@@ -333,23 +600,65 @@ const HeroSection = () => {
                     No credit card required. Instant access.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
-                  
-                    <select required defaultValue="" className="block w-full px-3 py-2 rounded border border-gray-300 appearance-none">
-                      
-                      <option value="" disabled className='option' >I am *</option>
-                      <option value="business" className='option'>Business Owner</option>
-                      <option value="accountant" className='option'>Accountant</option>
-                      <option value="student" className='option'>Student</option>
-                      <option value="others" className='option'>Others</option>
-                      
-                    </select>
                     
-                    <input type="text" required placeholder="Name *" className="block w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="tel" required placeholder="Phone *" className="block w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="email" required placeholder="Email *" className="block w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="text" required placeholder="Pincode *" className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <select
+                      required
+                      name="role"
+                      value={formData.role}
+                      onChange={handleInputChange}
+                      className="block w-full px-3 py-2 rounded border border-gray-300"
+                    >
+                      <option value="" disabled>I am *</option>
+                      <option value="business">Business Owner</option>
+                      <option value="accountant">Accountant</option>
+                      <option value="student">Student</option>
+                      <option value="others">Others</option>
+                    </select>
+
+                    <input
+                      type="text"
+                      required
+                      name="name"
+                      placeholder="Name *"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="block w-full px-3 py-2 rounded border border-gray-300"
+                    />
+                    <input
+                      type="tel"
+                      required
+                      name="phone"
+                      placeholder="Phone *"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="block w-full px-3 py-2 rounded border border-gray-300"
+                    />
+                    <input
+                      type="email"
+                      required
+                      name="email"
+                      placeholder="Email *"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="block w-full px-3 py-2 rounded border border-gray-300"
+                    />
+                    <input
+                      type="text"
+                      required
+                      name="pincode"
+                      placeholder="Pincode *"
+                      value={formData.pincode}
+                      onChange={handleInputChange}
+                      className="block w-full px-3 py-2 rounded border border-gray-300"
+                    />
                     <label className="flex items-start text-xs text-gray-600 space-x-2">
-                      <input type="checkbox" required className="mt-1 accent-blue-600" />
+                      <input
+                        type="checkbox"
+                        required
+                        className="mt-1 accent-blue-600"
+                        checked={formData.consent}
+                        onChange={handleCheckboxChange}
+                      />
                       <span>I agree to receive updates, offers & helpful insights on growing my business smarter.</span>
                     </label>
                     <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Register</button>
@@ -375,4 +684,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-

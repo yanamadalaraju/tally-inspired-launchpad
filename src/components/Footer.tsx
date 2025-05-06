@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../assets/tally-logo-white.svg'; // or './assets/logo.png' based on your file structure
+import logo from '../assets/Mcrt-logo-removebg-preview.png'; // or './assets/logo.png' based on your file structure
 import { Award, BadgeCheck, Facebook, FacebookIcon, Globe2, Instagram, Linkedin, Mail, MapPin, Phone, Smile, Users, Youtube } from 'lucide-react';
 
 
@@ -14,7 +14,7 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
           <div className="flex items-center space-x-4">
-  <h6 className="text-4xl font-bold text-white">MCR</h6>
+  {/* <h6 className="text-4xl font-bold text-white">MCRT Software India Pvt Ltd</h6> */}
   <Link to="/">
     <img
       src={logo}
