@@ -1,0 +1,36 @@
+.partners-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 20%,
+      black 80%,
+      transparent
+    );
+  }
+  
+  .partners-scroll {
+    display: flex;
+    width: max-content;
+    animation: slide 15s linear infinite;
+    will-change: transform; /* Optimize for animation */
+  }
+  
+  .partner-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px; /* Adjust based on your logo sizes */
+    padding: 0 2rem;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }

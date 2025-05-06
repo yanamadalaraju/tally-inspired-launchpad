@@ -231,20 +231,17 @@
 // export default HeroSection;
 import React, { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import './HeroSection.css';
 
 const HeroSection = () => {
   const formRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [shakeForm, setShakeForm] = useState(false);
 
   const handleFormShake = () => {
     setShakeForm(true);
-
-    // Reset the shake animation after 500ms
     setTimeout(() => {
       setShakeForm(false);
     }, 500);
@@ -273,15 +270,18 @@ const HeroSection = () => {
               {[
                 "collecting payments on time?",
                 "suppliers being paid properly?",
-                "managing your stock effectively?",
-                "filing your GST returns correctly?",
-                "tracking sales team performance?",
-                "matching your bank book with real transactions?"
+                "managing your stock efficiently?",
+                "filing your GST returns accurately?",
+                "effectively tracking your sales team's performance?",
+                "reconciling your bank book with actual transactions?"
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <span className="text-green-400">✅</span>
                   <span className="text-white">
-                    Are you <span className="font-medium underline">{item}</span>
+                    {item === "suppliers being paid properly?"
+                      ? <>Are your <span className="font-medium underline">{item}</span></>
+                      : <>Are you <span className="font-medium underline">{item}</span></>
+                    }
                   </span>
                 </li>
               ))}
@@ -297,17 +297,19 @@ const HeroSection = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start overflow-hidden">
-              <button onClick={handleFormShake}>
-                <Button className="group relative overflow-hidden border-2 border-transparent bg-white text-blue-700 font-semibold px-6 py-3 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700">
-                  <span className="absolute inset-0 z-0 bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 opacity-10 blur-md group-hover:opacity-30 transition-opacity duration-500 rounded-2xl"></span>
-                  <span className=" flex items-center gap-2 overflow-hidden">
-                    <ArrowRight className="h-5 w-5" />
-                    Register For Free Webinar
-                  </span>
-                </Button>
-              </button>
+              {!formSubmitted && (
+                <button onClick={handleFormShake}>
+                  <Button className="group relative overflow-hidden border-2 border-transparent bg-white text-blue-700 font-semibold px-6 py-3 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 ml-10">
+                    <span className="absolute inset-0 z-0 bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 opacity-10 blur-md group-hover:opacity-30 transition-opacity duration-500 rounded-2xl"></span>
+                    <span className=" flex items-center gap-2 overflow-hidden">
+                      <ArrowRight className="h-5 w-5" />
+                      Register For Free Webinar
+                    </span>
+                  </Button>
+                </button>
+              )}
 
-              <Link to="/start-free-trial">
+              {/* <Link to="/start-free-trial">
                 <Button className="group relative overflow-hidden border-2 border-transparent bg-white text-purple-700 font-semibold px-6 py-3 rounded-2xl shadow-lg transition-all duration-300 ease-in-out hover:scale-105 hover:text-white hover:bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700">
                   <span className="absolute inset-0 z-0 bg-gradient-to-r from-purple-300 via-purple-400 to-purple-500 opacity-10 blur-md group-hover:opacity-30 transition-opacity duration-500 rounded-2xl"></span>
                   <span className="relative z-10 flex items-center gap-2">
@@ -315,12 +317,12 @@ const HeroSection = () => {
                     Start Free Trial
                   </span>
                 </Button>
-              </Link>
+              </Link> */}
             </div>
           </div>
 
           {/* Right - Form */}
-          <div className="md:w-1/2" ref={formRef} id="formSection" >
+          <div className="md:w-1/2" ref={formRef} id="formSection">
             <div className={`bg-white rounded-xl p-6 shadow-lg w-full max-w-md mx-auto text-gray-800 ${shakeForm ? 'shake-form' : ''}`}>
               {!formSubmitted ? (
                 <>
@@ -331,24 +333,26 @@ const HeroSection = () => {
                     No credit card required. Instant access.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
-                    <select required defaultValue="" className="w-full px-3 py-2 rounded border border-gray-300">
-                      <option value="" disabled>I am *</option>
-                      <option value="business">Business Owner</option>
-                      <option value="accountant">Accountant</option>
-                      <option value="student">Student</option>
-                      <option value="others">Others</option>
+                  
+                    <select required defaultValue="" className="block w-full px-3 py-2 rounded border border-gray-300 appearance-none">
+                      
+                      <option value="" disabled className='option' >I am *</option>
+                      <option value="business" className='option'>Business Owner</option>
+                      <option value="accountant" className='option'>Accountant</option>
+                      <option value="student" className='option'>Student</option>
+                      <option value="others" className='option'>Others</option>
+                      
                     </select>
-                    <input type="text" required placeholder="Name *" className="w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="tel" required placeholder="Phone *" className="w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="email" required placeholder="Email *" className="w-full px-3 py-2 rounded border border-gray-300" />
-                    <input type="text" required placeholder="Pincode *" className="w-full px-3 py-2 rounded border border-gray-300" />
+                    
+                    <input type="text" required placeholder="Name *" className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="tel" required placeholder="Phone *" className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="email" required placeholder="Email *" className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="text" required placeholder="Pincode *" className="block w-full px-3 py-2 rounded border border-gray-300" />
                     <label className="flex items-start text-xs text-gray-600 space-x-2">
                       <input type="checkbox" required className="mt-1 accent-blue-600" />
-                      <span>I agree to the <a href="#" className="text-blue-600 underline">Terms & Conditions</a></span>
+                      <span>I agree to receive updates, offers & helpful insights on growing my business smarter.</span>
                     </label>
-                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">
-                      Register
-                    </button>
+                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Register</button>
                   </form>
                 </>
               ) : (
@@ -358,37 +362,17 @@ const HeroSection = () => {
                   <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded text-sm mb-3">
                     Check your inbox for login details.
                   </div>
-                  <p className="text-xs">
-                    Need help? <span onClick={() => setShowModal(true)} className="text-blue-600 underline cursor-pointer">Visit our Support Center</span>.
-                  </p>
+                  <p className="text-xs">Need help? Visit our <a href="/help-docs" className="text-blue-600 underline">Help Center</a>.</p>
                 </div>
               )}
             </div>
           </div>
+
         </div>
       </div>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-gradient-to-br from-lightBlue-400 via-lightBlue-500 to-lightBlue-600 text-white rounded-lg shadow-2xl max-w-md w-full p-8 relative">
-          <button onClick={() => setShowModal(false)} className="absolute top-3 right-3 text-gray-300 hover:text-white">
-            <X className="w-6 h-6" />
-          </button>
-          <h3 className="text-2xl font-semibold mb-3 text-center">Support Center</h3>
-          <p className="text-base mb-6 text-center text-gray-200">We're here to help! Reach out to us through the options below:</p>
-          <ul className="space-y-4 text-sm text-gray-100">
-            <li>📧 Email: <a href="mailto:sales@mcrindia.in" className="text-lightBlue-200 hover:text-lightBlue-400 transition-colors">sales@mcrindia.in</a></li>
-            <li>📞 Phone: <a href="tel:+919964740243" className="text-lightBlue-200 hover:text-lightBlue-400 transition-colors">+91 9964740243</a></li>
-            <li>💬 Live Chat: Available 9 AM – 6 PM</li>
-            <li>📚 <a href="/help-docs" className="text-lightBlue-200 hover:text-lightBlue-400 transition-colors">Help Documentation</a></li>
-          </ul>
-        </div>
-      </div>
-
-      )}
     </section>
   );
 };
 
 export default HeroSection;
+

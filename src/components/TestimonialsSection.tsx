@@ -4,6 +4,14 @@ import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Star } from 'lucide-react';
 
 const TestimonialsSection = () => {
+  const handleClick = () => {
+    const formSection = document.getElementById('formSection');
+    if (formSection) {
+      const offsetTop = formSection.offsetTop;
+      const offset = 80;
+      window.scrollTo({ top: offsetTop - offset, behavior: 'smooth' });
+    }
+  };
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -91,9 +99,9 @@ const TestimonialsSection = () => {
                 Experience the difference our business management software can make for your operations, 
                 compliance, and bottom line.
               </p>
-              <a href="/start-free-trail">
-  <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors mx-auto">
-    Start Your Free Trial
+              <a href="">
+  <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors mx-auto" onClick={handleClick}>
+  Claim Your Free Seat Before It’s Gone!
   </button>
 </a>
 

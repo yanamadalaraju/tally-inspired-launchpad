@@ -6,6 +6,14 @@ import {
 } from 'lucide-react';
 
 const FeatureSection = () => {
+  const handleClick = () => {
+    const formSection = document.getElementById('formSection');
+    if (formSection) {
+      const offsetTop = formSection.offsetTop;
+      const offset = 80;
+      window.scrollTo({ top: offsetTop - offset, behavior: 'smooth' });
+    }
+  };
   const features = [
     {
       icon: <Users className="h-8 w-8 text-secondary" />,
@@ -90,9 +98,9 @@ const FeatureSection = () => {
                     Start streamlining your operations and boost productivity today with our comprehensive solution.
                   </p>
                 </div>
-                <a href="/start-free-trail">
-  <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
-    Start Your Free Trial
+                <a href="">
+  <button className="bg-white text-primary font-medium px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors" onClick={handleClick}>
+  Secure Your Spot Today!
   </button>
 </a>
 

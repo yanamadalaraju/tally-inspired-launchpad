@@ -176,4 +176,43 @@
     100% { transform: translateX(0); }
   }
   
-  
+/* Dropdown wrapper for relative positioning */
+.custom-select-wrapper {
+  position: relative;
+}
+
+/* Styled select dropdown */
+.custom-select {
+  appearance: none; /* Remove default styling */
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+.option{
+  width:50px;
+}
+
+/* Focus and hover effects */
+.custom-select:focus {
+  border-color: #2563eb; /* Tailwind blue-600 */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* Arrow icon */
+.custom-select-wrapper::after {
+  content: '▼';
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

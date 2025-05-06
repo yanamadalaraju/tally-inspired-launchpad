@@ -13,6 +13,11 @@ import FeatureCard from '@/components/FeatureCard';
 import { Button } from 'react-day-picker';
 import GrowthSection from '@/components/GrowthSection';
 import growthImage from '../assets/engagement_feature.jpg'
+import VideoAdSection from '@/components/VideoAdSection';
+import CountdownSection from '@/components/CountdownSection';
+import PartnersSection from '@/components/PartnersSection';
+import image from '../assets/pexelmoney.webp'
+import CarouselSection from '@/components/CarouselSection';
 
 const Index = () => {
   const features = [
@@ -89,7 +94,7 @@ const Index = () => {
       <ScrollAnimateWrapper animation="fade-left">
         <div className="relative rounded-lg overflow-hidden shadow-xl">
           <img 
-            src="https://images.pexels.com/photos/4475523/pexels-photo-4475523.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" 
+            src={image}
             alt="TallyPrime Dashboard" 
             className="w-full h-auto"
           />
@@ -105,7 +110,12 @@ const Index = () => {
 </section>
 
       <WebinarForm />
+      {/* <CarouselSection /> */}
       <TestimonialsSection />
+
+      <VideoAdSection />
+      <CountdownSection />
+      <PartnersSection />
        {/* Features Section */}
        <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
