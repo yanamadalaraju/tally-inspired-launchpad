@@ -184,16 +184,16 @@ const WebinarForm = () => {
         </div>
 
         {/* Webinar Info Section */}
-        <div className="flex flex-col lg:flex-row gap-12 mb-12">
-          {/* Left Side: Webinar Details Card */}
-          {/* <div className="lg:w-1/2">
-            <WebinarDetailsCard {...webinarData} />
-          </div> */}
-          <div>
-      {webinars.map((webinar) => (
-        <WebinarDetailsCard key={webinar.id} {...webinar} />
-      ))}
-    </div>
+        {/* Webinar Info Section */}
+    <div className="flex flex-col lg:flex-row gap-12 mb-12">
+      {/* Left Side: Webinar Details Cards */}
+      <div className="lg:w-1/2 flex flex-wrap gap-6">
+        {webinars.map((webinar) => (
+          <div className="w-full md:w-1/2 lg:w-full">
+            <WebinarDetailsCard key={webinar.id} {...webinar} />
+          </div>
+        ))}
+      </div>
 
           {/* Right Side: Webinar Stats Banner */}
           <div className="lg:w-1/2">

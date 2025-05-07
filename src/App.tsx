@@ -13,6 +13,9 @@ import WebinarRegistrationForm from "./components/webinar/WebinarRegistrationFor
 import StartFreeTrial from "./pages/StartFreeTrial";
 import RegistrationsList from "./pages/RegistrationsList";
 import AddWebinarForm from "./components/AddWebinarForm";
+import Login from "./admin/Login";
+import Dashboard from "./admin/Dashboard";
+import AdminNavbar from "./admin/AdminNavbar";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,9 @@ const App = () => (
           <Route path="/start-free-trail" element={<StartFreeTrial />} />
           <Route path="/registrations" element={<RegistrationsList />} />
           <Route path="/add-webinar-details" element={<AddWebinarForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/admin-dashboard" element={<Dashboard />} />
+          <Route path="/admin-navbar" element={<AdminNavbar />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -31,9 +31,9 @@ const Navbar = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex space-x-3">
-          <Link to="/contact-sales">
+          <Link to="/login">
             <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">
-              Contact Sales
+              Log in
             </Button>
           </Link>
           <Link to="/get-demo">
@@ -63,11 +63,12 @@ const Navbar = () => {
 
             {/* Mobile Buttons */}
             <div className="flex flex-col space-y-2 pt-2">
-              <Link to="/contact-sales" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
-                  Contact Sales
-                </Button>
-              </Link>
+            <Link to="/login">
+  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">
+    Log in
+  </Button>
+</Link>
+
               <Link to="/get-demo" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full bg-secondary hover:bg-secondary-light text-white">
                   Get Demo

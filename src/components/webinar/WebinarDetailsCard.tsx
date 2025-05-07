@@ -91,7 +91,7 @@ import { Calendar, Clock, BarChart2, Users } from 'lucide-react';
 
 const WebinarDetailsCard = ({ title, date, duration, presenters, takeaways }) => {
   return (
-    <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[300px]">
       <h3 className="text-xl font-bold text-primary mb-4">{title}</h3>
 
       <div className="flex items-start mb-4">
@@ -132,5 +132,6 @@ const WebinarDetailsCard = ({ title, date, duration, presenters, takeaways }) =>
     </div>
   );
 };
+
 
 export default WebinarDetailsCard;
