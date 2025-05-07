@@ -117,13 +117,33 @@
 // export default WebinarForm;
 
 import React from 'react';
+import  { useEffect, useState } from 'react';
 import WebinarBenefits from './webinar/WebinarBenefits';
 import WebinarDetailsCard from './webinar/WebinarDetailsCard';
 import WebinarStatsBanner from './webinar/WebinarStatsBanner';
 import Image from '../assets/business-marketing.jpg';
 import FAQSection from './FAQSection';
+import axios from 'axios';
 
 const WebinarForm = () => {
+  const [webinars, setWebinars] = useState([]);
+  useEffect(() => {
+    const fetchWebinars = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/webinars');
+        const formattedData = response.data.map(w => ({
+          ...w,
+          takeaways: JSON.parse(w.takeaways || '[]'),
+        }));
+        setWebinars(formattedData);
+      } catch (error) {
+        console.error('Error fetching webinars:', error);
+      }
+    };
+
+    fetchWebinars();
+  }, []);
+
   const webinarBenefits = [
     "Master advanced inventory management techniques",
     "Learn one-click GST compliance and automated filing",
@@ -134,6 +154,20 @@ const WebinarForm = () => {
     "Boost profitability by reducing manual tasks",
     "Get live answers from top industry experts"
   ];
+
+  const webinarData = {
+    title: 'Webinar Overview',
+    date: 'Thursday, May 15th, 2025 at 11:00 AM EST',
+    duration: '45 minutes of presentation, followed by a 15-minute Q&A session',
+    presenters:
+      'Industry specialists with over 15 years of experience, providing insights into the latest trends and solutions.',
+    takeaways: [
+      'Master advanced inventory management techniques',
+      'Learn how to streamline operations and boost profitability',
+      'Gain practical insights into optimizing your business strategy',
+      'Discover the latest technologies for improving supply chain efficiency',
+    ],
+  };
 
   return (
     <section id="webinar" className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
@@ -152,17 +186,20 @@ const WebinarForm = () => {
         {/* Webinar Info Section */}
         <div className="flex flex-col lg:flex-row gap-12 mb-12">
           {/* Left Side: Webinar Details Card */}
-          <div className="lg:w-1/2">
-            <WebinarDetailsCard />
-          </div>
+          {/* <div className="lg:w-1/2">
+            <WebinarDetailsCard {...webinarData} />
+          </div> */}
+          <div>
+      {webinars.map((webinar) => (
+        <WebinarDetailsCard key={webinar.id} {...webinar} />
+      ))}
+    </div>
 
           {/* Right Side: Webinar Stats Banner */}
           <div className="lg:w-1/2">
             <WebinarStatsBanner />
           </div>
         </div>
-
-        
 
         {/* Webinar Benefits and Image Section */}
         <div className="flex flex-col lg:flex-row justify-center items-center gap-10 pt-10 lg:pt-16">

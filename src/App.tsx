@@ -12,6 +12,7 @@ import CombinedLanding from "./pages/CombinedLanding";
 import WebinarRegistrationForm from "./components/webinar/WebinarRegistrationForm";
 import StartFreeTrial from "./pages/StartFreeTrial";
 import RegistrationsList from "./pages/RegistrationsList";
+import AddWebinarForm from "./components/AddWebinarForm";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/webinar" element={<WebinarRegistrationForm />} />
           <Route path="/start-free-trail" element={<StartFreeTrial />} />
           <Route path="/registrations" element={<RegistrationsList />} />
+          <Route path="/add-webinar-details" element={<AddWebinarForm />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

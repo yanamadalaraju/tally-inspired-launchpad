@@ -469,7 +469,6 @@ const HeroSection = () => {
     phone: '',
     email: '',
     pincode: '',
-    consent: false,
   });
 
   const handleFormShake = () => {
@@ -487,17 +486,12 @@ const HeroSection = () => {
     });
   };
 
-  const handleCheckboxChange = (e) => {
-    setFormData({
-      ...formData,
-      consent: e.target.checked,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.role && formData.name && formData.phone && formData.email && formData.pincode && formData.consent) {
+    const { role, name, phone, email, pincode } = formData;
+
+    if (role && name && phone && email && pincode) {
       try {
         const response = await fetch('http://localhost:5000/submit-form', {
           method: 'POST',
@@ -536,33 +530,28 @@ const HeroSection = () => {
             </p>
 
             <ul className="text-sm md:text-base space-y-3 mb-5">
-  {[
-    "collecting payments on time?",
-    "suppliers being paid properly?",
-    "managing your stock efficiently?",
-    "filing your GST returns accurately?",
-    "effectively tracking your sales team's performance?",
-    "reconciling your bank book with actual transactions?",
-  ].map((item, idx) => (
-    <li
-      key={idx}
-      className="flex items-start gap-2 sm:gap-3 md:gap-3 lg:gap-4 flex-wrap"
-    >
-      <span className="text-green-400">✅</span>
-      <span className="text-white">
-        {item === "suppliers being paid properly?"
-          ? (
-            <>Are your <span className="font-medium underline">{item}</span></>
-          )
-          : (
-            <>Are you <span className="font-medium underline">{item}</span></>
-          )}
-      </span>
-    </li>
-  ))}
-</ul>
-
-
+              {[
+                "collecting payments on time?",
+                "suppliers being paid properly?",
+                "managing your stock efficiently?",
+                "filing your GST returns accurately?",
+                "effectively tracking your sales team's performance?",
+                "reconciling your bank book with actual transactions?",
+              ].map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2 flex-wrap">
+                  <span className="text-green-400">✅</span>
+                  <span className="text-white">
+                    {item === "suppliers being paid properly?"
+                      ? (
+                        <>Are your <span className="font-medium underline">{item}</span></>
+                      )
+                      : (
+                        <>Are you <span className="font-medium underline">{item}</span></>
+                      )}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
             <p className="text-slate-200 text-sm md:text-base leading-relaxed mb-6">
               <span className="text-white text-base font-semibold block mb-1">🤔 Still unsure?</span>
@@ -600,7 +589,7 @@ const HeroSection = () => {
                     No credit card required. Instant access.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
-                    
+
                     <select
                       required
                       name="role"
@@ -651,16 +640,7 @@ const HeroSection = () => {
                       onChange={handleInputChange}
                       className="block w-full px-3 py-2 rounded border border-gray-300"
                     />
-                    <label className="flex items-start text-xs text-gray-600 space-x-2">
-                      <input
-                        type="checkbox"
-                        required
-                        className="mt-1 accent-blue-600"
-                        checked={formData.consent}
-                        onChange={handleCheckboxChange}
-                      />
-                      <span>I agree to receive updates, offers & helpful insights on growing my business smarter.</span>
-                    </label>
+
                     <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Register</button>
                   </form>
                 </>
@@ -684,3 +664,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
