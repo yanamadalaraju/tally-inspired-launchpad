@@ -465,6 +465,7 @@ const HeroSection = () => {
   const [shakeForm, setShakeForm] = useState(false);
   const [formData, setFormData] = useState({
     role: '',
+    businessType: '',
     name: '',
     phone: '',
     email: '',
@@ -590,19 +591,38 @@ const HeroSection = () => {
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
 
+                  <select
+  required
+  name="role"
+  value={formData.role}
+  onChange={handleInputChange}
+  className="block w-full px-3 py-2 rounded border border-gray-300"
+>
+  <option value="" disabled>I am *</option>
+  <option value="businessOwner">Business Owner</option>
+  <option value="accountant">Accountant</option>
+  <option value="student">Student</option>
+  <option value="others">Others</option>
+</select>
+
+
                     <select
-                      required
-                      name="role"
-                      value={formData.role}
-                      onChange={handleInputChange}
-                      className="block w-full px-3 py-2 rounded border border-gray-300"
-                    >
-                      <option value="" disabled>I am *</option>
-                      <option value="business">Business Owner</option>
-                      <option value="accountant">Accountant</option>
-                      <option value="student">Student</option>
-                      <option value="others">Others</option>
-                    </select>
+    required
+    name="businessType"
+    value={formData.businessType}
+    onChange={handleInputChange}
+    className="block w-full px-3 py-2 rounded border border-gray-300"
+  >
+    <option value="" disabled>Business Type *</option>
+    <option value="retail">Retail</option>
+    <option value="wholesale">Wholesale</option>
+    <option value="manufacturing">Manufacturing</option>
+    <option value="service">Service-Based</option>
+    <option value="distribution">Distribution</option>
+    <option value="freelance">Freelancer/Sole Proprietor</option>
+    <option value="education">Education/Training</option>
+    <option value="others">Others</option>
+  </select>
 
                     <input
                       type="text"

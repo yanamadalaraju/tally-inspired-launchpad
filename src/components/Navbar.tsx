@@ -36,7 +36,7 @@ const Navbar = () => {
               Log in
             </Button>
           </Link>
-          <Link to="/get-demo">
+          <Link to="">
             <Button className="bg-secondary hover:bg-secondary-light text-white transition-all duration-300 transform hover:scale-105">
               Get Demo
             </Button>
@@ -69,7 +69,7 @@ const Navbar = () => {
   </Button>
 </Link>
 
-              <Link to="/get-demo" onClick={() => setIsMenuOpen(false)}>
+              <Link to="" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full bg-secondary hover:bg-secondary-light text-white">
                   Get Demo
                 </Button>

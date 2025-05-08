@@ -138,8 +138,8 @@ import AdminNavbar from '@/admin/AdminNavbar';
 import WebinarDetailsCard from './webinar/WebinarDetailsCard';
 
 const AddWebinarForm = () => {
-    const [webinars, setWebinars] = useState([]);
-    
+  const [webinars, setWebinars] = useState([]);
+
   useEffect(() => {
     const fetchWebinars = async () => {
       try {
@@ -198,14 +198,13 @@ const AddWebinarForm = () => {
     try {
       const response = await axios.post('http://localhost:5000/admin/add-webinar', payload);
 
-      // Split the received takeaways back into an array
       const updatedWebinar = {
         ...response.data,
         takeaways: response.data.takeaways?.split('\n') || [],
       };
 
       setNewWebinar(updatedWebinar);
-      
+
       alert('✅ Webinar added successfully!');
       setFormData({
         title: '',
@@ -214,6 +213,14 @@ const AddWebinarForm = () => {
         presenters: '',
         takeaways: [''],
       });
+
+      // Refetch webinars after adding
+      const refetch = await axios.get('http://localhost:5000/webinars');
+      const formatted = refetch.data.map(w => ({
+        ...w,
+        takeaways: JSON.parse(w.takeaways || '[]'),
+      }));
+      setWebinars(formatted);
     } catch (error) {
       console.error('Error adding webinar:', error);
       alert('❌ Failed to add webinar.');
@@ -225,96 +232,108 @@ const AddWebinarForm = () => {
   return (
     <>
       <AdminNavbar />
-<div className="flex flex-col lg:flex-row max-w-6xl mx-auto mt-28 p-6 gap-6">
-  {/* Form Section */}
-  <div className="lg:w-1/2 bg-white p-6 rounded-lg shadow-md">
-  <h2 className="text-3xl font-semibold text-center text-blue-700 mb-6">➕ Add New Webinar</h2>
+      <div className="flex flex-col lg:flex-row max-w-6xl mx-auto mt-28 p-6 gap-6">
+        {/* Form Section */}
+        <div className="lg:w-1/2 bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-3xl font-semibold text-center text-blue-700 mb-6">➕ Add New Webinar</h2>
 
-  <form onSubmit={handleSubmit} className="space-y-5">
-    {/* Form Fields */}
-    <input
-      type="text"
-      name="title"
-      placeholder="Webinar Title"
-      value={formData.title}
-      onChange={handleChange}
-      required
-      className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-    />
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <input
+              type="text"
+              name="title"
+              placeholder="Webinar Title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <input
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-        required
-        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-      />
-      <input
-        type="text"
-        name="duration"
-        placeholder="Duration (e.g., 1 Hour)"
-        value={formData.duration}
-        onChange={handleChange}
-        required
-        className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-      />
-    </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="duration"
+                placeholder="Duration (e.g., 1 Hour)"
+                value={formData.duration}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              />
+            </div>
 
-    <input
-      type="text"
-      name="presenters"
-      placeholder="Presenters (e.g., John, Jane)"
-      value={formData.presenters}
-      onChange={handleChange}
-      required
-      className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-    />
+            <input
+              type="text"
+              name="presenters"
+              placeholder="Presenters (e.g., John, Jane)"
+              value={formData.presenters}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            />
 
-    <div>
-      <label className="block text-lg font-medium mb-2 text-gray-700">🎯 Key Takeaways</label>
-      {formData.takeaways.map((item, index) => (
-        <input
-          key={index}
-          type="text"
-          value={item}
-          onChange={(e) => handleTakeawayChange(index, e.target.value)}
-          placeholder={`Takeaway ${index + 1}`}
-          className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-          required
-        />
-      ))}
-      <button
-        type="button"
-        onClick={addTakeawayField}
-        className="text-sm text-blue-600 hover:text-blue-800 mt-1"
-      >
-        ➕ Add another takeaway
-      </button>
-    </div>
+            <div>
+              <label className="block text-lg font-medium mb-2 text-gray-700">🎯 Key Takeaways</label>
+              {formData.takeaways.map((item, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  value={item}
+                  onChange={(e) => handleTakeawayChange(index, e.target.value)}
+                  placeholder={`Takeaway ${index + 1}`}
+                  className="w-full px-4 py-2 mb-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                  required
+                />
+              ))}
+              <button
+                type="button"
+                onClick={addTakeawayField}
+                className="text-sm text-blue-600 hover:text-blue-800 mt-1"
+              >
+                ➕ Add another takeaway
+              </button>
+            </div>
 
-    <button
-      type="submit"
-      disabled={isSubmitting}
-      className={`w-full py-3 text-white font-medium rounded-md transition ${
-        isSubmitting ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
-      }`}
-    >
-      {isSubmitting ? 'Submitting...' : '📤 Submit Webinar'}
-    </button>
-  </form>
-</div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full py-3 text-white font-medium rounded-md transition ${
+                isSubmitting ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+              }`}
+            >
+              {isSubmitting ? 'Submitting...' : '📤 Submit Webinar'}
+            </button>
+          </form>
+        </div>
 
+        {/* Webinar Details Section */}
+        <div className="lg:w-1/2 space-y-6">
+          {/* Live Preview */}
+          {formData.title && (
+            <div className="opacity-90 border-2 border-dashed border-blue-300 rounded-lg p-3">
+              <WebinarDetailsCard
+                title={formData.title}
+                date={formData.date}
+                duration={formData.duration}
+                presenters={formData.presenters}
+                takeaways={formData.takeaways}
+              />
+              <p className="text-sm text-gray-500 italic text-center mt-1">📝 Live Preview</p>
+            </div>
+          )}
 
-  {/* Webinar Details Section */}
-  <div className="lg:w-1/2 space-y-6">
-    {webinars.map((webinar) => (
-      <WebinarDetailsCard key={webinar.id} {...webinar} />
-    ))}
-  </div>
-</div>
-
+          {/* Existing Webinars */}
+          {webinars.map((webinar) => (
+            <WebinarDetailsCard key={webinar.id} {...webinar} />
+          ))}
+        </div>
+      </div>
     </>
   );
 };

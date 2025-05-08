@@ -32,11 +32,69 @@ db.connect((err) => {
 });
 
 // POST route to handle form submission
-app.post('/submit-form', (req, res) => {
-  const { role, name, phone, email, pincode } = req.body;
+// app.post('/submit-form', (req, res) => {
+//   const { role, name, phone, email, pincode } = req.body;
 
-  const query = 'INSERT INTO registrations (role, name, phone, email, pincode) VALUES (?, ?, ?, ?, ?)';
-  db.query(query, [role, name, phone, email, pincode], (err, result) => {
+//   const query = 'INSERT INTO registrations (role, name, phone, email, pincode) VALUES (?, ?, ?, ?, ?)';
+//   db.query(query, [role, name, phone, email, pincode], (err, result) => {
+//     if (err) {
+//       console.error('Error inserting data:', err);
+//       return res.status(500).send('Error inserting data');
+//     }
+//     res.status(200).send('Form submitted successfully');
+//   });
+// });
+
+// // GET route to fetch all form registrations
+// app.get('/get-registrations', (req, res) => {
+//   const query = 'SELECT * FROM registrations ORDER BY id DESC';
+//   db.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error fetching data:', err);
+//       return res.status(500).send('Error fetching data');
+//     }
+//     res.status(200).json(results);
+//   });
+// });
+
+// // PUT route to update a registration
+// app.put('/update-registration', (req, res) => {
+//   const { id, role, name, phone, email, pincode } = req.body;
+
+//   const query = `
+//     UPDATE registrations
+//     SET role = ?, name = ?, phone = ?, email = ?, pincode = ?
+//     WHERE id = ?
+//   `;
+//   db.query(query, [role, name, phone, email, pincode, id], (err, result) => {
+//     if (err) {
+//       console.error('Error updating registration:', err);
+//       return res.status(500).send({ success: false, message: 'Error updating registration' });
+//     }
+//     res.status(200).send({ success: true, message: 'Registration updated successfully' });
+//   });
+// });
+
+// // DELETE route to remove a registration by ID
+// app.delete('/delete-registration/:id', (req, res) => {
+//   const { id } = req.params;
+
+//   const query = 'DELETE FROM registrations WHERE id = ?';
+//   db.query(query, [id], (err, result) => {
+//     if (err) {
+//       console.error('Error deleting registration:', err);
+//       return res.status(500).send({ success: false, message: 'Error deleting registration' });
+//     }
+//     res.status(200).send({ success: true, message: 'Registration deleted successfully' });
+//   });
+// });
+
+// POST route to handle form submission
+app.post('/submit-form', (req, res) => {
+  const { role, name, phone, email, pincode, businessType } = req.body;
+
+  const query = 'INSERT INTO registrations (role, name, phone, email, pincode, business_type) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(query, [role, name, phone, email, pincode, businessType], (err, result) => {
     if (err) {
       console.error('Error inserting data:', err);
       return res.status(500).send('Error inserting data');
@@ -59,14 +117,14 @@ app.get('/get-registrations', (req, res) => {
 
 // PUT route to update a registration
 app.put('/update-registration', (req, res) => {
-  const { id, role, name, phone, email, pincode } = req.body;
+  const { id, role, name, phone, email, pincode, business_type } = req.body;
 
   const query = `
     UPDATE registrations
-    SET role = ?, name = ?, phone = ?, email = ?, pincode = ?
+    SET role = ?, name = ?, phone = ?, email = ?, pincode = ?, business_type = ?
     WHERE id = ?
   `;
-  db.query(query, [role, name, phone, email, pincode, id], (err, result) => {
+  db.query(query, [role, name, phone, email, pincode, business_type, id], (err, result) => {
     if (err) {
       console.error('Error updating registration:', err);
       return res.status(500).send({ success: false, message: 'Error updating registration' });
@@ -88,6 +146,7 @@ app.delete('/delete-registration/:id', (req, res) => {
     res.status(200).send({ success: true, message: 'Registration deleted successfully' });
   });
 });
+
 
 // GET route to fetch webinar details
 app.get('/webinars', (req, res) => {
