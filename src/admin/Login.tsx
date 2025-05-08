@@ -1,6 +1,7 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,19 +9,16 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Default credentials
-    const defaultEmail = 'admin@admin.com';
-    const defaultPassword = 'admin123';
-
-    if (email === defaultEmail && password === defaultPassword) {
+    try {
+      const res = await axios.post('http://localhost:5000/login', { email, password });
+      if (res.data.success) {
         localStorage.setItem('isAuthenticated', 'true');
-        // Simple auth flag
-      navigate('/admin-dashboard');
-    } else {
-      setError('Invalid credentials. Try admin@admin.com / admin123');
+        navigate('/admin-dashboard');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed');
     }
   };
 

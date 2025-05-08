@@ -18,8 +18,23 @@ import CountdownSection from '@/components/CountdownSection';
 import PartnersSection from '@/components/PartnersSection';
 import image from '../assets/pexelmoney.webp'
 import CarouselSection from '@/components/CarouselSection';
+import FAQSection from '@/components/FAQSection';
 
 const Index = () => {
+
+  const handleClick = () => {
+    const formSection = document.getElementById('formSection');
+    if (formSection) {
+      const offsetTop = formSection.offsetTop; // Get the top position of the form
+      const offset = 80; // Adjust this value to your header height or preferred offset
+
+      window.scrollTo({
+        top: offsetTop - offset, // Subtract the offset so the form is fully visible
+        behavior: 'smooth',
+      });
+    }
+  };
+  
   const features = [
     {
       icon: Database,
@@ -50,6 +65,29 @@ const Index = () => {
       icon: Clock,
       title: 'Process Automation',
       description: 'Save time and reduce errors by automating routine business processes and workflows.'
+    }
+  ];
+
+  const faqItems = [
+    {
+      question: 'How do I update to the latest version of TallyPrime?',
+      answer: 'You can update TallyPrime by accessing the "Help" menu and selecting "Check for Updates." Alternatively, you can download the latest version from our website and install it over your existing installation. Your data will be preserved during the update process.'
+    },
+    {
+      question: 'How can I back up my TallyPrime data?',
+      answer: 'TallyPrime offers automated and manual backup options. Go to "Company Info" > "Backup" to create a manual backup. For automated backups, configure the settings under "F12: Configure" > "Advanced Configuration" > "Data Configuration."'
+    },
+    {
+      question: 'I\'ve forgotten my TallyPrime password. What should I do?',
+      answer: 'If you\'ve forgotten your password, please contact our support team with your license details. We\'ll verify your identity and help you reset your password. For security reasons, we cannot reset passwords without proper verification.'
+    },
+    {
+      question: 'How do I transfer my license to a new computer?',
+      answer: 'To transfer your TallyPrime license to a new computer, you\'ll need to deactivate it on your current system first. Go to "Help" > "Activate License" > "Deactivate License." Then, install TallyPrime on your new computer and activate it using your existing license key.'
+    },
+    {
+      question: 'Can I use TallyPrime on multiple devices?',
+      answer: 'TallyPrime licensing is based on the number of users. Single-user licenses can be installed on one system at a time. Multi-user licenses allow concurrent access based on the number of users purchased. You can always upgrade your license if you need more users.'
     }
   ];
   return (
@@ -149,6 +187,52 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+       {/* FAQ Section */}
+       <section className="py-4 mt-[40px] bg-[#F7FAFC] rounded-2xl">
+  <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <ScrollAnimateWrapper animation="fade-up">
+      <div className="text-center mb-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1AC8A6] mb-1">
+          Frequently Asked Questions
+        </h2>
+        <p className="text-sm text-slate-600 max-w-md mx-auto">
+          Answers to common questions about TallyPrime Solutions.
+        </p>
+      </div>
+    </ScrollAnimateWrapper>
+
+    <div className="space-y-3">
+      {faqItems.map((item, index) => (
+        <ScrollAnimateWrapper key={index} animation="fade-up" delay={index * 100}>
+          <details className="bg-[#EDF1F7] rounded-lg shadow-sm border-l-4 border-[#1AC8A6] overflow-hidden">
+            <summary className="px-4 py-3 cursor-pointer text-[#0B2C4D] font-medium text-sm hover:text-[#1AC8A6] transition-colors">
+              {item.question}
+            </summary>
+            <div className="px-4 py-3 border-t border-[#D1D5DB] bg-white">
+              <p className="text-sm text-gray-700">{item.answer}</p>
+            </div>
+          </details>
+        </ScrollAnimateWrapper>
+      ))}
+
+      <ScrollAnimateWrapper animation="fade-up" delay={500}>
+        <div className="mt-4 text-center">
+          <p className="text-gray-600 text-sm mb-2">
+            Still need help?
+          </p>
+          <button
+  className="bg-[#1AC8A6] hover:bg-[#17b09a] text-[#0B2C4D] font-semibold px-4 py-2 rounded-full shadow-md transition-all" onClick={handleClick}
+>
+Get Expert Help
+</button>
+
+        </div>
+      </ScrollAnimateWrapper>
+    </div>
+  </div>
+</section>
+      
       <Footer />
     </div>
   );

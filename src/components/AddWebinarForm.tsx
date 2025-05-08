@@ -163,6 +163,7 @@ const AddWebinarForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     date: '',
+    time: '',
     duration: '',
     presenters: '',
     takeaways: [''],
@@ -193,7 +194,9 @@ const AddWebinarForm = () => {
       duration: formData.duration.trim(),
       presenters: formData.presenters.trim(),
       takeaways: formData.takeaways.map((t) => t.trim()).join('\n'),
+      time: formData.time.trim(),
     };
+    
 
     try {
       const response = await axios.post('http://localhost:5000/admin/add-webinar', payload);
@@ -209,6 +212,7 @@ const AddWebinarForm = () => {
       setFormData({
         title: '',
         date: '',
+        time: '',
         duration: '',
         presenters: '',
         takeaways: [''],
@@ -257,6 +261,14 @@ const AddWebinarForm = () => {
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
               />
+              <input
+    type="time"
+    name="time"
+    value={formData.time}
+    onChange={handleChange}
+    required
+    className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  />
               <input
                 type="text"
                 name="duration"
@@ -320,6 +332,7 @@ const AddWebinarForm = () => {
               <WebinarDetailsCard
                 title={formData.title}
                 date={formData.date}
+                time={formData.time}
                 duration={formData.duration}
                 presenters={formData.presenters}
                 takeaways={formData.takeaways}

@@ -2,7 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const bcrypt = require('bcryptjs');
+ // ✅ Import bcrypt
 
 
 
@@ -231,7 +232,7 @@ const promisePool = pool.promise();
 
 // POST route to handle form submission
 app.post('/admin/add-webinar', async (req, res) => {
-  const { title, date, duration, presenters, takeaways } = req.body;
+  const { title, date,time, duration, presenters, takeaways } = req.body;
   
   // Split takeaways into an array and remove empty entries
   const takeawaysArray = takeaways.split('\n').map(item => item.trim()).filter(Boolean);
@@ -248,8 +249,8 @@ app.post('/admin/add-webinar', async (req, res) => {
     await connection.execute('DELETE FROM webinars');
 
     // Now, insert the new webinar
-    const query = 'INSERT INTO webinars (title, date, duration, presenters, takeaways) VALUES (?, ?, ?, ?, ?)';
-    await connection.execute(query, [title, date, duration, presenters, takeawaysJSON]);
+    const query = 'INSERT INTO webinars (title, date,time, duration, presenters, takeaways) VALUES (?, ?, ?, ?,?, ?)';
+    await connection.execute(query, [title, date,time, duration, presenters, takeawaysJSON]);
 
     // Commit the transaction if everything went fine
     await connection.commit();
@@ -260,6 +261,43 @@ app.post('/admin/add-webinar', async (req, res) => {
     console.error('Error inserting webinar:', err);
     res.status(500).send('Error inserting webinar');
   }
+});
+
+
+// Register endpoint
+app.post('/register', async (req, res) => {
+  const { email, password } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
+  db.query(sql, [email, hashedPassword], (err, result) => {
+    if (err) {
+      if (err.code === 'ER_DUP_ENTRY') {
+        return res.status(400).json({ message: 'Email already exists' });
+      }
+      return res.status(500).json({ message: 'Server error' });
+    }
+    res.status(201).json({ message: 'User registered successfully' });
+  });
+});
+
+// Login endpoint
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
+    if (err) return res.status(500).json({ message: 'Server error' });
+    if (results.length === 0) return res.status(400).json({ message: 'Invalid credentials' });
+
+    const user = results[0];
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      res.json({ success: true });
+    } else {
+      res.status(400).json({ message: 'Invalid credentials' });
+    }
+  });
 });
 
 

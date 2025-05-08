@@ -16,6 +16,7 @@ import AddWebinarForm from "./components/AddWebinarForm";
 import Login from "./admin/Login";
 import Dashboard from "./admin/Dashboard";
 import AdminNavbar from "./admin/AdminNavbar";
+import Register from "./admin/Register";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/admin-dashboard" element={<Dashboard />} />
           <Route path="/admin-navbar" element={<AdminNavbar />} />
+          <Route path="/Register" element={<Register />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

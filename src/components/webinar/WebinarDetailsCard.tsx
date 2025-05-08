@@ -88,8 +88,9 @@
 
 import React from 'react';
 import { Calendar, Clock, BarChart2, Users } from 'lucide-react';
+import { time } from 'console';
 
-const WebinarDetailsCard = ({ title, date, duration, presenters, takeaways }) => {
+const WebinarDetailsCard = ({ title, date,time, duration, presenters, takeaways }) => {
   return (
     <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[300px]">
       <h3 className="text-xl font-bold text-primary mb-4">{title}</h3>
@@ -98,7 +99,12 @@ const WebinarDetailsCard = ({ title, date, duration, presenters, takeaways }) =>
         <Calendar className="h-5 w-5 text-blue-500 mr-3 mt-0.5" />
         <div>
           <h4 className="font-semibold text-primary text-sm">Next Webinar Date</h4>
-          <p className="text-sm text-gray-700">{date}</p>
+          <p className="text-sm text-gray-700">
+  {new Date(date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}{" "}{time}
+</p>
+
+
+
         </div>
       </div>
 
