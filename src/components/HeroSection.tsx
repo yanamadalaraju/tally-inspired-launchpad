@@ -463,6 +463,7 @@ const HeroSection = () => {
   const formRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [shakeForm, setShakeForm] = useState(false);
+  const [loading, setLoading] = useState(false); // <- NEW
   const [formData, setFormData] = useState({
     role: '',
     businessType: '',
@@ -471,6 +472,7 @@ const HeroSection = () => {
     email: '',
     pincode: '',
   });
+  const [message, setMessage] = useState('');
 
   const handleFormShake = () => {
     setShakeForm(true);
@@ -489,10 +491,10 @@ const HeroSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { role, name, phone, email, pincode } = formData;
 
     if (role && name && phone && email && pincode) {
+      setLoading(true); // Start loading
       try {
         const response = await fetch('http://localhost:5000/submit-form', {
           method: 'POST',
@@ -504,15 +506,19 @@ const HeroSection = () => {
 
         if (response.ok) {
           setFormSubmitted(true);
+          setMessage('✅ Registration Successful! You will receive an email shortly.');
         } else {
-          alert('Error submitting form. Please try again.');
+          setMessage('❌ Error submitting form. Please try again.');
         }
       } catch (error) {
         console.error('Error submitting form:', error);
-        alert('Error submitting form. Please try again.');
+        setMessage('❌ Error submitting form. Please try again.');
+      } finally {
+        setLoading(false); // Stop loading
       }
     } else {
       handleFormShake();
+      setMessage('❌ Please fill all required fields.');
     }
   };
 
@@ -590,88 +596,62 @@ const HeroSection = () => {
                     No credit card required. Instant access.
                   </p>
                   <form onSubmit={handleSubmit} className="space-y-3 text-sm">
+                    <select required name="role" value={formData.role} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300">
+                      <option value="" disabled>I am *</option>
+                      <option value="businessOwner">Business Owner</option>
+                      <option value="accountant">Accountant</option>
+                      <option value="student">Student</option>
+                      <option value="others">Others</option>
+                    </select>
 
-                  <select
-  required
-  name="role"
-  value={formData.role}
-  onChange={handleInputChange}
-  className="block w-full px-3 py-2 rounded border border-gray-300"
->
-  <option value="" disabled>I am *</option>
-  <option value="businessOwner">Business Owner</option>
-  <option value="accountant">Accountant</option>
-  <option value="student">Student</option>
-  <option value="others">Others</option>
-</select>
+                    <select required name="businessType" value={formData.businessType} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300">
+                      <option value="" disabled>Business Type *</option>
+                      <option value="retail">Retail</option>
+                      <option value="wholesale">Wholesale</option>
+                      <option value="manufacturing">Manufacturing</option>
+                      <option value="service">Service-Based</option>
+                      <option value="distribution">Distribution</option>
+                      <option value="freelance">Freelancer/Sole Proprietor</option>
+                      <option value="education">Education/Training</option>
+                      <option value="others">Others</option>
+                    </select>
 
+                    <input type="text" required name="name" placeholder="Name *" value={formData.name} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="tel" required name="phone" placeholder="Phone *" value={formData.phone} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="email" required name="email" placeholder="Email *" value={formData.email} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300" />
+                    <input type="text" required name="pincode" placeholder="Pincode *" value={formData.pincode} onChange={handleInputChange} className="block w-full px-3 py-2 rounded border border-gray-300" />
 
-                    <select
-    required
-    name="businessType"
-    value={formData.businessType}
-    onChange={handleInputChange}
-    className="block w-full px-3 py-2 rounded border border-gray-300"
-  >
-    <option value="" disabled>Business Type *</option>
-    <option value="retail">Retail</option>
-    <option value="wholesale">Wholesale</option>
-    <option value="manufacturing">Manufacturing</option>
-    <option value="service">Service-Based</option>
-    <option value="distribution">Distribution</option>
-    <option value="freelance">Freelancer/Sole Proprietor</option>
-    <option value="education">Education/Training</option>
-    <option value="others">Others</option>
-  </select>
-
-                    <input
-                      type="text"
-                      required
-                      name="name"
-                      placeholder="Name *"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="block w-full px-3 py-2 rounded border border-gray-300"
-                    />
-                    <input
-                      type="tel"
-                      required
-                      name="phone"
-                      placeholder="Phone *"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="block w-full px-3 py-2 rounded border border-gray-300"
-                    />
-                    <input
-                      type="email"
-                      required
-                      name="email"
-                      placeholder="Email *"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="block w-full px-3 py-2 rounded border border-gray-300"
-                    />
-                    <input
-                      type="text"
-                      required
-                      name="pincode"
-                      placeholder="Pincode *"
-                      value={formData.pincode}
-                      onChange={handleInputChange}
-                      className="block w-full px-3 py-2 rounded border border-gray-300"
-                    />
-
-                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg">Register</button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className={`w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg flex items-center justify-center gap-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    >
+                      {loading ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="white" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="white" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"></path>
+                          </svg>
+                          Registering...
+                        </>
+                      ) : (
+                        "Register"
+                      )}
+                    </button>
                   </form>
                 </>
               ) : (
-                <div className="text-center py-10 text-gray-700">
-                  <h2 className="text-lg font-bold text-green-600 mb-2">✅ You're All Set!</h2>
-                  <p className="mb-3">Your account is now active and ready to use.</p>
-                  <div className="bg-blue-100 text-blue-800 px-3 py-2 rounded text-sm mb-3">
-                    Check your inbox for login details.
+                <div className="flex justify-center items-center py-8 px-3 bg-gradient-to-r from-blue-50 to-blue-100">
+                  <div className="max-w-sm w-full bg-white shadow-md rounded-md p-5 text-center">
+                    <h2 className="text-lg font-bold text-green-600 mb-3">✅ Registration Successful!</h2>
+                    <p className="text-sm text-gray-700 mb-4">You've successfully registered for the webinar.</p>
+                    <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-md text-xs mb-4 shadow-sm">
+                      Webinar details have been sent to your email.
+                    </div>
+                    <p className="text-xs text-gray-600">
+                      Didn't receive the email? Check your spam folder.
+                    </p>
                   </div>
-                  <p className="text-xs">Need help? Visit our <a href="/help-docs" className="text-blue-600 underline">Help Center</a>.</p>
                 </div>
               )}
             </div>
@@ -684,4 +664,6 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
+
 

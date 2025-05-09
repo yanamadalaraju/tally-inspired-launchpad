@@ -86,58 +86,125 @@
 // export default WebinarDetailsCard;
 
 
-import React from 'react';
+// import React from 'react';
+// import { Calendar, Clock, BarChart2, Users } from 'lucide-react';
+
+// const WebinarDetailsCard = ({ title, date, time, ampm, duration, presenters, takeaways }) => {
+//   return (
+//     <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[300px]">
+//       <h3 className="text-xl font-bold text-primary mb-4">{title}</h3>
+
+//       <div className="flex items-start mb-4">
+//         <Calendar className="h-5 w-5 text-blue-500 mr-3 mt-0.5" />
+//         <div>
+//           <h4 className="font-semibold text-primary text-sm">Next Webinar Date</h4>
+//           <p className="text-sm text-gray-700">
+//             {new Date(date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })} at {time} {ampm}
+//           </p>
+//         </div>
+//       </div>
+
+//       <div className="flex items-start mb-4">
+//         <Clock className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+//         <div>
+//           <h4 className="font-semibold text-primary text-sm">Duration</h4>
+//           <p className="text-sm text-gray-700">{duration}</p>
+//         </div>
+//       </div>
+
+//       <div className="flex items-start mb-4">
+//         <Users className="h-5 w-5 text-yellow-500 mr-3 mt-0.5" />
+//         <div>
+//           <h4 className="font-semibold text-primary text-sm">Expert Presenters</h4>
+//           <p className="text-sm text-gray-700">{presenters}</p>
+//         </div>
+//       </div>
+
+//       <div className="flex items-start">
+//         <BarChart2 className="h-5 w-5 text-purple-500 mr-3 mt-0.5" />
+//         <div>
+//           <h4 className="font-semibold text-primary text-sm">Key Takeaways</h4>
+//           <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
+//             {takeaways.map((item, index) => (
+//               <li key={index}>{item}</li>
+//             ))}
+//           </ul>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default WebinarDetailsCard;
+
+import React, { useEffect, useRef, useState } from 'react';
 import { Calendar, Clock, BarChart2, Users } from 'lucide-react';
-import { time } from 'console';
 
-const WebinarDetailsCard = ({ title, date,time, duration, presenters, takeaways }) => {
+const WebinarDetailsCard = ({ title, date, time, ampm, duration, presenters, takeaways }) => {
+  const contentRef = useRef(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (el) {
+      setIsOverflowing(el.scrollHeight > el.offsetHeight);
+    }
+  }, [title, date, time, ampm, duration, presenters, takeaways]);
+
   return (
-    <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 min-h-[300px]">
-      <h3 className="text-xl font-bold text-primary mb-4">{title}</h3>
+    <div className="relative w-full max-w-2xl h-[65vh] bg-white rounded-lg p-4 sm:p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
 
-      <div className="flex items-start mb-4">
-        <Calendar className="h-5 w-5 text-blue-500 mr-3 mt-0.5" />
-        <div>
-          <h4 className="font-semibold text-primary text-sm">Next Webinar Date</h4>
-          <p className="text-sm text-gray-700">
-  {new Date(date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}{" "}{time}
-</p>
-
-
-
+      {/* Fading Overlay + Message when content overflows */}
+      {isOverflowing && (
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent z-10 flex items-end justify-center pointer-events-none">
+          <span className="text-xs text-gray-500 pb-2">Maximum content limit reached</span>
         </div>
-      </div>
+      )}
 
-      <div className="flex items-start mb-4">
-        <Clock className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
-        <div>
-          <h4 className="font-semibold text-primary text-sm">Duration</h4>
-          <p className="text-sm text-gray-700">{duration}</p>
+      <div ref={contentRef} className="relative z-0 max-h-[70vh] overflow-y-auto pr-2">
+        <h3 className="text-xl sm:text-2xl font-bold text-primary mb-4">{title}</h3>
+
+        <div className="flex items-start mb-4">
+          <Calendar className="h-5 w-5 text-blue-500 mr-3 mt-0.5" />
+          <div>
+            <h4 className="font-semibold text-primary text-sm">Next Webinar Date</h4>
+            <p className="text-sm text-gray-700">
+              {new Date(date).toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })} at {time} {ampm}
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex items-start mb-4">
-        <Users className="h-5 w-5 text-yellow-500 mr-3 mt-0.5" />
-        <div>
-          <h4 className="font-semibold text-primary text-sm">Expert Presenters</h4>
-          <p className="text-sm text-gray-700">{presenters}</p>
+        <div className="flex items-start mb-4">
+          <Clock className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+          <div>
+            <h4 className="font-semibold text-primary text-sm">Duration</h4>
+            <p className="text-sm text-gray-700">{duration}</p>
+          </div>
         </div>
-      </div>
 
-      <div className="flex items-start">
-        <BarChart2 className="h-5 w-5 text-purple-500 mr-3 mt-0.5" />
-        <div>
-          <h4 className="font-semibold text-primary text-sm">Key Takeaways</h4>
-          <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
-            {takeaways.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+        <div className="flex items-start mb-4">
+          <Users className="h-5 w-5 text-yellow-500 mr-3 mt-0.5" />
+          <div>
+            <h4 className="font-semibold text-primary text-sm">Expert Presenters</h4>
+            <p className="text-sm text-gray-700">{presenters}</p>
+          </div>
+        </div>
+
+        <div className="flex items-start">
+          <BarChart2 className="h-5 w-5 text-purple-500 mr-3 mt-0.5" />
+          <div>
+            <h4 className="font-semibold text-primary text-sm">Key Takeaways</h4>
+            <ul className="text-sm text-gray-700 list-disc list-inside space-y-1">
+              {takeaways.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-
 export default WebinarDetailsCard;
+

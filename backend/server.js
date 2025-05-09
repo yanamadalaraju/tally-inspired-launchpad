@@ -3,6 +3,8 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+require('dotenv').config();
  // ✅ Import bcrypt
 
 
@@ -31,6 +33,58 @@ db.connect((err) => {
   }
   console.log('Connected to MySQL');
 });
+
+
+app.post('/submit-form', async (req, res) => {
+  const { name, email, phone, pincode, role, businessType } = req.body;
+
+  try {
+    // Create the transporter for Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.GMAIL_USER,  // Your Gmail address
+        pass: process.env.GMAIL_PASS,   // App password from Gmail
+      },
+    });
+
+    // Mail options
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: email,
+      subject: '🎉 You’re Registered for the MCRT Webinar!',
+      html: `
+        <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: auto; padding: 20px;">
+          <h2 style="color: #2e7d32;">Hi ${name},</h2>
+          <p>Thank you for registering for our upcoming webinar! We're excited to have you join us.</p>
+    
+          <p style="margin-top: 20px;"><strong>Your Registration Details:</strong></p>
+          <ul style="line-height: 1.6;">
+            <li><strong>Role:</strong> ${role}</li>
+            <li><strong>Business Type:</strong> ${businessType}</li>
+            <li><strong>Phone:</strong> ${phone}</li>
+            <li><strong>Pincode:</strong> ${pincode}</li>
+          </ul>
+    
+          <p style="margin-top: 20px;">You will receive the webinar access link and details via email shortly. Please keep an eye on your inbox (and spam folder, just in case).</p>
+    
+          <p style="margin-top: 30px;">If you have any questions, feel free to <a href="mailto:sales@mcrindia.in" style="color: #1976d2;">contact us</a>.</p>
+    
+          <p style="margin-top: 30px;">Warm regards,<br /><strong>MCRT Indian Private Limited <br />Team</strong></p>
+        </div>
+      `
+    };
+    
+
+    // Send the email
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Mail sent successfully' });
+  } catch (err) {
+    console.error('Email sending failed:', err);
+    res.status(500).json({ message: 'Failed to send email' });
+  }
+});
+
 
 // POST route to handle form submission
 // app.post('/submit-form', (req, res) => {
@@ -262,6 +316,48 @@ app.post('/admin/add-webinar', async (req, res) => {
     res.status(500).send('Error inserting webinar');
   }
 });
+
+app.put('/admin/edit-webinar/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, date, time, duration, presenters, takeaways } = req.body;
+
+  // Prepare takeaways array
+  const takeawaysArray = takeaways
+    .split('\n')
+    .map(item => item.trim())
+    .filter(Boolean);
+  const takeawaysJSON = JSON.stringify(takeawaysArray);
+
+  try {
+    const connection = await promisePool.getConnection();
+
+    const query = `
+      UPDATE webinars 
+      SET title = ?, date = ?, time = ?, duration = ?, presenters = ?, takeaways = ?
+      WHERE id = ?
+    `;
+
+    const [result] = await connection.execute(query, [
+      title,
+      date,
+      time,
+      duration,
+      presenters,
+      takeawaysJSON,
+      id
+    ]);
+
+    if (result.affectedRows === 0) {
+      res.status(404).send('Webinar not found');
+    } else {
+      res.send('<p>Webinar updated successfully! <a href="/admin/edit-webinar">Edit another</a></p>');
+    }
+  } catch (err) {
+    console.error('Error updating webinar:', err);
+    res.status(500).send('Error updating webinar');
+  }
+});
+
 
 
 // Register endpoint
