@@ -250,50 +250,15 @@ app.put('/admin/edit-webinar/:id', async (req, res) => {
   }
 });
 
-// app.post('/register', async (req, res) => {
-//   const { email, password } = req.body;
-//   const hashedPassword = await bcrypt.hash(password, 10);
-//   db.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (err) => {
-//     if (err) {
-//       if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ message: 'Email already exists' });
-//       return res.status(500).json({ message: 'Database error' });
-//     }
-//     res.status(200).json({ message: 'User registered successfully' });
-//   });
-// });
-
 app.post('/register', async (req, res) => {
   const { email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
-
-  const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
-  db.query(sql, [email, hashedPassword], (err, result) => {
+  db.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], (err) => {
     if (err) {
-      if (err.code === 'ER_DUP_ENTRY') {
-        return res.status(400).json({ message: 'Email already exists' });
-      }
-      return res.status(500).json({ message: 'Server error' });
+      if (err.code === 'ER_DUP_ENTRY') return res.status(400).json({ message: 'Email already exists' });
+      return res.status(500).json({ message: 'Database error' });
     }
-    res.status(201).json({ message: 'User registered successfully' });
-  });
-});
-
-// Login endpoint
-app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-
-  db.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
-    if (err) return res.status(500).json({ message: 'Server error' });
-    if (results.length === 0) return res.status(400).json({ message: 'Invalid credentials' });
-
-    const user = results[0];
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (isMatch) {
-      res.json({ success: true });
-    } else {
-      res.status(400).json({ message: 'Invalid credentials' });
-    }
+    res.status(200).json({ message: 'User registered successfully' });
   });
 });
 
