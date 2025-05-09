@@ -505,7 +505,7 @@ const RegistrationsList = () => {
       <AdminNavbar />
       <div className="p-6 max-w-7xl mx-auto pt-20">
         <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">
-          📋 Registered Users
+          📋 Registered Members
         </h2>
 
         {/* Search */}
