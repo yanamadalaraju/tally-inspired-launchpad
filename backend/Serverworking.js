@@ -145,12 +145,6 @@ const mailOptions = {
             <td style="padding: 8px 0;">${pincode}</td>
           </tr>
         </table>
-        <!-- WhatsApp Group Invitation -->
-<div style="margin-top: 30px; text-align: center;">
-  <a href="https://chat.whatsapp.com/L9nszf5pCWy6wMSHcnCdXy " target="_blank" style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 15px; display: inline-block;">
-    👉 Join Our WhatsApp Group
-  </a>
-</div>
 
         <p style="font-size: 15px; color: #555; margin-top: 30px;">
           We look forward to your participation. Keep an eye on your inbox for updates and reminders as the event approaches.
@@ -161,7 +155,7 @@ const mailOptions = {
         <p style="font-size: 14px; color: #888;">
           Warm regards,<br />
           <strong>MCRT Indian Private Limited Team</strong><br />
-          <a href=" " target="_blank" style="color: #1e88e5; text-decoration: none;"> </a>
+          <a href="https://www.mcrtindia.com" target="_blank" style="color: #1e88e5; text-decoration: none;">www.mcrtindia.com</a>
         </p>
       </div>
     </div>

@@ -651,6 +651,27 @@ const HeroSection = () => {
                     <p className="text-xs text-gray-600">
                       Didn't receive the email? Check your spam folder.
                     </p>
+                      {/* WhatsApp Group Link */}
+    <p className="text-xs text-gray-700 mt-4 mb-1">
+  📢 Stay connected!
+</p>
+<a
+  href="https://chat.whatsapp.com/L9nszf5pCWy6wMSHcnCdXy"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium shadow-sm hover:bg-green-200 transition"
+>
+  <span className="inline-block animate-shake">👉</span>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+    alt="WhatsApp"
+    className="inline-block w-4 h-4 ml-1 mr-2 align-text-bottom"
+  />
+  📱 Join our WhatsApp Group to get real-time updates, reminders, and exclusive webinar resources!
+</a>
+
+
+
                   </div>
                 </div>
               )}

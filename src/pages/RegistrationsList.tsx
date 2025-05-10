@@ -533,7 +533,8 @@ const RegistrationsList = () => {
                   ['name', 'Name'],
                   ['phone', 'Phone'],
                   ['email', 'Email'],
-                  ['pincode', 'Pincode'],
+                  // ['pincode', 'Pincode'],
+                  ['created_at', 'Created At'],
                   ['business_type', 'Business Type'],
                 ].map(([key, label]) => (
                   <th
@@ -555,7 +556,15 @@ const RegistrationsList = () => {
     <td className="px-6 py-2">{reg.name}</td>
     <td className="px-6 py-2">{reg.phone}</td>
     <td className="px-6 py-2">{reg.email}</td>
-    <td className="px-6 py-2">{reg.pincode}</td>
+    {/* <td className="px-6 py-2">{reg.pincode}</td> */}
+    <td className="px-6 py-2">
+  {new Date(reg.created_at).toLocaleDateString('en-IN', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  })}
+</td>
+
     <td className="px-6 py-2 capitalize">{reg.business_type || 'N/A'}</td>
     <td className="px-6 py-2 flex items-center space-x-2">
       <button title="View" onClick={() => openModal(reg, 'view')}>
