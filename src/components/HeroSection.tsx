@@ -656,7 +656,7 @@ const HeroSection = () => {
   📢 Stay connected!
 </p>
 <a
-  href="https://chat.whatsapp.com/L9nszf5pCWy6wMSHcnCdXy"
+  href="https://chat.whatsapp.com/KyXpyUh6BBcBCIrWDr1i1T"
   target="_blank"
   rel="noopener noreferrer"
   className="inline-block text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium shadow-sm hover:bg-green-200 transition"

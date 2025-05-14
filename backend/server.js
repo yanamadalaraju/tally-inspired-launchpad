@@ -147,7 +147,7 @@ const mailOptions = {
         </table>
         <!-- WhatsApp Group Invitation -->
 <div style="margin-top: 30px; text-align: center;">
-  <a href="https://chat.whatsapp.com/L9nszf5pCWy6wMSHcnCdXy " target="_blank" style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 15px; display: inline-block;">
+  <a href="https://chat.whatsapp.com/KyXpyUh6BBcBCIrWDr1i1T" target="_blank" style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-size: 15px; display: inline-block;">
     👉 Join Our WhatsApp Group
   </a>
 </div>
