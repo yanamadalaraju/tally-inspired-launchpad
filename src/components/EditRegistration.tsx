@@ -146,6 +146,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import baseURL from '@/Api';
 
 const EditRegistration = ({ registration, onClose, onUpdate }) => {
   const [formData, setFormData] = useState({
@@ -181,7 +182,7 @@ const EditRegistration = ({ registration, onClose, onUpdate }) => {
     const updatedRegistration = { ...formData, id: registration.id };
 
     try {
-      const response = await fetch(`http://localhost:5000/update-registration`, {
+      const response = await fetch(`${baseURL}/update-registration`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

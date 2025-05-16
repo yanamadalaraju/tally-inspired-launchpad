@@ -7,6 +7,7 @@ import ScrollAnimateWrapper from '../components/ScrollAnimateWrapper';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart2, Download, BookOpen, MessageSquare, RefreshCw, FileText, Users, Shield, Award, Star } from "lucide-react";
 import RequestDemoForm from '@/components/RequestDemoForm';
+import ExistingCustomerNav from '@/components/ExistingCustomerNav';
 
 const ExistingCustomers = () => {
   const updateFeatures = [
@@ -82,59 +83,62 @@ const ExistingCustomers = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
+      <ExistingCustomerNav />
       
       {/* Hero Section */}
-      <section className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-r from-primary to-primary-light text-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center">
-            <div className="md:w-2/3 mb-10 md:mb-0">
-              <div className="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm font-medium mb-4">
-                Valued Customer
+     <section className="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-r from-primary to-primary-light text-white">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-col md:flex-row items-center">
+      <div className="md:w-2/3 mb-10 md:mb-0">
+        <div className="inline-block bg-secondary/20 text-secondary px-3 py-1 rounded-full text-sm font-medium mb-4">
+          For Our Valued Customers
+        </div>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          Unlock Even More Value with Your Current Subscription
+        </h1>
+        <p className="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl">
+          We appreciate your continued trust in our services. Here are some exclusive updates and advanced features to help you get the most out of your investment.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium">
+            Access Your Account
+          </Button>
+          <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
+            Contact Support
+          </Button>
+        </div>
+      </div>
+
+      {/* Right - Customer Portal Section */}
+      <div className="md:w-1/3 flex justify-center">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-tr from-secondary/30 to-transparent rounded-lg transform rotate-6"></div>
+          <div className="relative bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 p-6 text-primary">
+            <h3 className="text-xl font-bold mb-2">Customer Portal</h3>
+            <div className="space-y-4 mt-4">
+              <div className="flex items-center">
+                <RefreshCw className="h-5 w-5 text-secondary mr-3" />
+                <span className="text-gray-700">New Feature Updates</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                Unlock Even More Value From Your Investment
-              </h1>
-              <p className="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl">
-                Discover the latest updates, access exclusive resources, and maximize your business management solution's capabilities.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-secondary hover:bg-secondary-light text-white font-medium">
-                  Access Your Account
-                </Button>
-                <Button size="lg" variant="outline" className="bg-white/10 hover:bg-white/20 text-white border-white">
-                  Contact Support
-                </Button>
+              <div className="flex items-center">
+                <Download className="h-5 w-5 text-secondary mr-3" />
+                <span className="text-gray-700">Exclusive Resources</span>
               </div>
-            </div>
-            <div className="md:w-1/3 flex justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-secondary/30 to-transparent rounded-lg transform rotate-6"></div>
-                <div className="relative bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 p-6 text-primary">
-                  <h3 className="text-xl font-bold mb-2">Customer Portal</h3>
-                  <div className="space-y-4 mt-4">
-                    <div className="flex items-center">
-                      <RefreshCw className="h-5 w-5 text-secondary mr-3" />
-                      <span className="text-gray-700">Latest Updates</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Download className="h-5 w-5 text-secondary mr-3" />
-                      <span className="text-gray-700">Resources</span>
-                    </div>
-                    <div className="flex items-center">
-                      <MessageSquare className="h-5 w-5 text-secondary mr-3" />
-                      <span className="text-gray-700">Support Tickets</span>
-                    </div>
-                  </div>
-                  <Button className="w-full mt-6 bg-primary hover:bg-primary-light">
-                    Login Now
-                  </Button>
-                </div>
+              <div className="flex items-center">
+                <MessageSquare className="h-5 w-5 text-secondary mr-3" />
+                <span className="text-gray-700">Support & Assistance</span>
               </div>
             </div>
+            <Button className="w-full mt-6 bg-primary hover:bg-primary-light">
+              Enroll Now to Access New Features
+            </Button>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Latest Updates Section */}
       <section className="py-16 md:py-24">

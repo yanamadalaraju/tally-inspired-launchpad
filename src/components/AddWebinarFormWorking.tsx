@@ -189,127 +189,71 @@ const AddWebinarForm = () => {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsSubmitting(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  //   const payload = {
-  //     ...formData,
-  //     title: formData.title.trim(),
-  //     duration: formData.duration.trim(),
-  //     presenters: formData.presenters.trim(),
-  //     takeaways: formData.takeaways.map((t) => t.trim()).join('\n'),
-  //     time: `${formData.time.trim()} ${formData.ampm}`, // combine time and AM/PM
-  //   };
+    const payload = {
+      ...formData,
+      title: formData.title.trim(),
+      duration: formData.duration.trim(),
+      presenters: formData.presenters.trim(),
+      takeaways: formData.takeaways.map((t) => t.trim()).join('\n'),
+      time: `${formData.time.trim()} ${formData.ampm}`, // combine time and AM/PM
+    };
 
-  //   try {
-  //     if (isEditing) {
-  //       // Update existing webinar
-  //       const response = await axios.put(
-  //         `${baseURL}/admin/edit-webinar/${editingWebinarId}`,
-  //         payload
-  //       );
-  //       const updatedWebinar = {
-  //         ...response.data,
-  //         takeaways: response.data.takeaways?.split('\n') || [],
-  //       };
+    try {
+      if (isEditing) {
+        // Update existing webinar
+        const response = await axios.put(
+          `${baseURL}/admin/edit-webinar/${editingWebinarId}`,
+          payload
+        );
+        const updatedWebinar = {
+          ...response.data,
+          takeaways: response.data.takeaways?.split('\n') || [],
+        };
 
-  //       alert('✅ Webinar updated successfully!');
-  //     } else {
-  //       // Add new webinar
-  //       const response = await axios.post(
-  //         `${baseURL}/admin/add-webinar`,
-  //         payload
-  //       );
-  //       const updatedWebinar = {
-  //         ...response.data,
-  //         takeaways: response.data.takeaways?.split('\n') || [],
-  //       };
+        alert('✅ Webinar updated successfully!');
+      } else {
+        // Add new webinar
+        const response = await axios.post(
+          `${baseURL}/admin/add-webinar`,
+          payload
+        );
+        const updatedWebinar = {
+          ...response.data,
+          takeaways: response.data.takeaways?.split('\n') || [],
+        };
 
-  //       alert('✅ Webinar added successfully!');
-  //     }
+        alert('✅ Webinar added successfully!');
+      }
 
-  //     // Refetch webinars after adding or editing
-  //     const refetch = await axios.get(`${baseURL}/webinars`);
-  //     const formatted = refetch.data.map((w) => ({
-  //       ...w,
-  //       takeaways: JSON.parse(w.takeaways || '[]'),
-  //     }));
-  //     setWebinars(formatted);
-  //     setIsEditing(false); // Reset editing state after submit
-  //     setFormData({
-  //       title: '',
-  //       date: '',
-  //       time: '',
-  //       ampm: 'AM',
-  //       duration: '',
-  //       presenters: '',
-  //       takeaways: [''],
-  //     });
-  //   } catch (error) {
-  //     console.error('Error submitting webinar:', error);
-  //     alert('❌ Failed to submit webinar.');
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-    const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-
-  const payload = {
-    ...formData,
-    title: formData.title.trim(),
-    duration: formData.duration.trim(),
-    presenters: formData.presenters.trim(),
-    takeaways: formData.takeaways.map((t) => t.trim()).join('\n'),
-    time: `${formData.time.trim()} ${formData.ampm}`,
+      // Refetch webinars after adding or editing
+      const refetch = await axios.get(`${baseURL}/webinars`);
+      const formatted = refetch.data.map((w) => ({
+        ...w,
+        takeaways: JSON.parse(w.takeaways || '[]'),
+      }));
+      setWebinars(formatted);
+      setIsEditing(false); // Reset editing state after submit
+      setFormData({
+        title: '',
+        date: '',
+        time: '',
+        ampm: 'AM',
+        duration: '',
+        presenters: '',
+        takeaways: [''],
+      });
+    } catch (error) {
+      console.error('Error submitting webinar:', error);
+      alert('❌ Failed to submit webinar.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  try {
-    if (isEditing) {
-      // Update existing webinar
-      const response = await axios.put(
-        `${baseURL}/admin/edit-webinar/${editingWebinarId}`,
-        payload
-      );
-      alert('✅ Webinar updated successfully!');
-    } else {
-      // Add new webinar
-      const response = await axios.post(
-        `${baseURL}/admin/add-webinar`,
-        payload
-      );
-      alert(`✅ Webinar added successfully with ID: ${response.data.webinar_id}`);
-    }
-
-    // Refetch webinars after adding or editing
-    const refetch = await axios.get(`${baseURL}/webinars`);
-    const formatted = refetch.data.map((w) => ({
-      ...w,
-      takeaways: JSON.parse(w.takeaways || '[]'),
-    }));
-    setWebinars(formatted);
-    
-    // Reset form
-    setIsEditing(false);
-    setEditingWebinarId(null);
-    setFormData({
-      title: '',
-      date: '',
-      time: '',
-      ampm: 'AM',
-      duration: '',
-      presenters: '',
-      takeaways: [''],
-    });
-  } catch (error) {
-    console.error('Error submitting webinar:', error);
-    alert('❌ Failed to submit webinar.');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
   const handleEdit = (webinarId) => {
     const webinarToEdit = webinars.find((w) => w.id === webinarId);
     setEditingWebinarId(webinarId);
@@ -326,19 +270,6 @@ const AddWebinarForm = () => {
       takeaways: webinarToEdit.takeaways || [''],
     });
   };
-
-   // Get most recent webinar
-  const getMostRecentWebinar = () => {
-    if (webinars.length === 0) return null;
-    
-    return webinars.reduce((recent, current) => {
-      const recentDate = new Date(recent.date);
-      const currentDate = new Date(current.date);
-      return currentDate > recentDate ? current : recent;
-    });
-  };
-
-  const mostRecentWebinar = getMostRecentWebinar();
 
   return (
     <>
@@ -473,47 +404,54 @@ const AddWebinarForm = () => {
 
 
 
-                {/* Webinar Details Section */}
         {/* Webinar Details Section */}
         <div className="lg:w-1/2 space-y-6">
-          {/* Live Preview */}
-          {formData.title && (
-            <div>
-              <h3 className="text-lg font-semibold text-blue-700 mb-3">
-                {isEditing ? 'Live Edit Preview' : 'Live Preview'}
-              </h3>
-              <WebinarDetailsCard
-                title={formData.title}
-                date={formData.date}
-                time={`${formData.time} ${formData.ampm}`}
-                ampm={formData.ampm}
-                duration={formData.duration}
-                presenters={formData.presenters}
-                takeaways={formData.takeaways}
-              />
-            </div>
-          )}
+          {/* Show live preview while adding a new webinar */}
+          {/* Show live preview while adding or editing a webinar */}
+{formData.title && (
+  <div>
+    <h3 className="text-lg font-semibold text-blue-700 mb-3">
+      {isEditing ? 'Live Edit Preview' : 'Live Preview'}
+    </h3>
+    <div>
+      <WebinarDetailsCard
+                  title={formData.title}
+                  date={formData.date}
+                  time={`${formData.time} ${formData.ampm}`}
+                  duration={formData.duration}
+                  presenters={formData.presenters}
+                  takeaways={formData.takeaways} ampm={undefined}      />
+    </div>
+  </div>
+)}
 
-          {/* Most Recent Webinar */}
-          {!isEditing && !formData.title && mostRecentWebinar && (
-            <div>
-              <WebinarDetailsCard
-                title={mostRecentWebinar.title}
-                date={mostRecentWebinar.date}
-                time={mostRecentWebinar.time}
-                ampm={mostRecentWebinar.ampm}
-                duration={mostRecentWebinar.duration}
-                presenters={mostRecentWebinar.presenters}
-                takeaways={mostRecentWebinar.takeaways}
-              />
-              <button
-                onClick={() => handleEdit(mostRecentWebinar.id)}
-                className="text-sm text-blue-600 hover:text-blue-800 mt-2"
-              >
-                ✏️ Edit Webinar
-              </button>
-            </div>
-          )}
+
+          {/* Existing webinars */}
+         {/* Existing webinars */}
+{!isEditing && !formData.title && webinars.length > 0 && (
+  <div>
+    {webinars.map((webinar) => (
+      <div key={webinar.id} className="mb-4">
+        <WebinarDetailsCard
+          title={webinar.title}
+          date={webinar.date}
+          time={webinar.time}
+          ampm={webinar.ampm}
+          duration={webinar.duration}
+          presenters={webinar.presenters}
+          takeaways={webinar.takeaways}
+        />
+        <button
+          onClick={() => handleEdit(webinar.id)}
+          className="text-sm text-blue-600 hover:text-blue-800"
+        >
+          ✏️ Edit Webinar
+        </button>
+      </div>
+    ))}
+  </div>
+)}
+
         </div>
       </div>
     </>

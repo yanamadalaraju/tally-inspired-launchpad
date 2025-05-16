@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../assets/Mcrt-logo-removebg-preview.png';
-
+import baseURL from '@/Api';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/login', { email, password });
+      const res = await axios.post(`${baseURL}/login`, { email, password });
       if (res.data.success) {
         localStorage.setItem('isAuthenticated', 'true');
         navigate('/admin-dashboard');

@@ -59,6 +59,7 @@
 // export default Register;
 import React, { useState } from 'react';
 import axios from 'axios';
+import baseURL from '../Api'
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -75,7 +76,7 @@ const Register = () => {
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/register', { email, password });
+      const res = await axios.post(`${baseURL}/register`, { email, password });
       setMsg(res.data.message);
       setEmail('');
       setPassword('');

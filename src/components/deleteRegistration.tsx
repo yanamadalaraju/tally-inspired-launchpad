@@ -1,8 +1,8 @@
 // src/api/deleteRegistration.js
-
+import baseURL from "@/Api";
 const deleteRegistration = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/delete-registration/${id}`, {
+      const response = await fetch(`${baseURL}/delete-registration/${id}`, {
         method: 'DELETE',
       });
   

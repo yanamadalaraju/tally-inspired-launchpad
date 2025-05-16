@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import AdminNavbar from '@/admin/AdminNavbar';
 import WebinarDetailsCard from './WebinarDetailsCard';
-
+import baseURL from '@/Api';
 const AddWebinarForm = () => {
   const [webinars, setWebinars] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +21,7 @@ const AddWebinarForm = () => {
   useEffect(() => {
     const fetchWebinars = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/webinars');
+        const response = await axios.get(`${baseURL}/webinars`);
         const formattedData = response.data.map((w) => ({
           ...w,
           takeaways: JSON.parse(w.takeaways || '[]'),
@@ -71,7 +71,7 @@ const AddWebinarForm = () => {
       if (isEditing) {
         // Update existing webinar
         const response = await axios.put(
-          `http://localhost:5000/admin/edit-webinar/${editingWebinarId}`,
+          `${baseURL}/admin/edit-webinar/${editingWebinarId}`,
           payload
         );
         const updatedWebinar = {
@@ -83,7 +83,7 @@ const AddWebinarForm = () => {
       } else {
         // Add new webinar
         const response = await axios.post(
-          'http://localhost:5000/admin/add-webinar',
+          `${baseURL}/admin/add-webinar`,
           payload
         );
         const updatedWebinar = {
@@ -95,7 +95,7 @@ const AddWebinarForm = () => {
       }
 
       // Refetch webinars after adding or editing
-      const refetch = await axios.get('http://localhost:5000/webinars');
+      const refetch = await axios.get(`${baseURL}/webinars`);
       const formatted = refetch.data.map((w) => ({
         ...w,
         takeaways: JSON.parse(w.takeaways || '[]'),

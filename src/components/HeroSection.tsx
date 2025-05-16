@@ -458,6 +458,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import './HeroSection.css';
+import baseURL from '@/Api';
 
 const HeroSection = () => {
   const formRef = useRef(null);
@@ -489,38 +490,85 @@ const HeroSection = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { role, name, phone, email, pincode } = formData;
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const { role, name, phone, email, pincode } = formData;
 
-    if (role && name && phone && email && pincode) {
-      setLoading(true); // Start loading
-      try {
-        const response = await fetch('http://localhost:5000/submit-form', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
+  //   if (role && name && phone && email && pincode) {
+  //     setLoading(true); // Start loading
+  //     try {
+  //       const response = await fetch(`${baseURL}/submit-form`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: JSON.stringify(formData),
+  //       });
 
-        if (response.ok) {
-          setFormSubmitted(true);
-          setMessage('✅ Registration Successful! You will receive an email shortly.');
-        } else {
-          setMessage('❌ Error submitting form. Please try again.');
-        }
-      } catch (error) {
-        console.error('Error submitting form:', error);
+  //       if (response.ok) {
+  //         setFormSubmitted(true);
+  //         setMessage('✅ Registration Successful! You will receive an email shortly.');
+  //       } else {
+  //         setMessage('❌ Error submitting form. Please try again.');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error submitting form:', error);
+  //       setMessage('❌ Error submitting form. Please try again.');
+  //     } finally {
+  //       setLoading(false); // Stop loading
+  //     }
+  //   } else {
+  //     handleFormShake();
+  //     setMessage('❌ Please fill all required fields.');
+  //   }
+  // };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const { role, name, phone, email, pincode } = formData;
+
+  if (role && name && phone && email && pincode) {
+    setLoading(true); // Start loading
+    try {
+      // Step 1: Fetch webinars
+      const webinarRes = await fetch(`${baseURL}/webinars`);
+      const webinars = await webinarRes.json();
+
+      // Step 2: Get the highest webinar ID
+      const maxWebinar = webinars.reduce((max, webinar) => {
+        return webinar.id > max.id ? webinar : max;
+      }, webinars[0]);
+
+      const updatedFormData = {
+        ...formData,
+        webinar_id: maxWebinar?.webinar_id || null, // Step 3: Add webinar_id
+      };
+
+      // Step 4: Submit form
+      const response = await fetch(`${baseURL}/submit-form`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedFormData),
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+        setMessage('✅ Registration Successful! You will receive an email shortly.');
+      } else {
         setMessage('❌ Error submitting form. Please try again.');
-      } finally {
-        setLoading(false); // Stop loading
       }
-    } else {
-      handleFormShake();
-      setMessage('❌ Please fill all required fields.');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setMessage('❌ Error submitting form. Please try again.');
+    } finally {
+      setLoading(false); // Stop loading
     }
-  };
+  } else {
+    handleFormShake();
+    setMessage('❌ Please fill all required fields.');
+  }
+};
 
   return (
     <section className="pt-20 pb-16 bg-gradient-to-br from-[#0f172a] to-[#1e3a8a] text-white overflow-hidden">

@@ -19,6 +19,11 @@ import AdminNavbar from "./admin/AdminNavbar";
 import Register from "./admin/Register";
 import SuccessPage from "./components/SuccessPage";
 import FailurePage from "./components/FailurePage";
+import ExistingCustomerNav from "./components/ExistingCustomerNav";
+import RequestDemoTable from "./admin/Existing_Customers/RequestDemoTable";
+import EditDemoRequest from "./admin/Existing_Customers/EditDemoRequest";
+import AllPaymentsPage from "./pages/AllPaymentsPage";
+import StatusPage from "./pages/StatusPage";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +48,13 @@ const App = () => (
           <Route path="/Register" element={<Register />} />
           <Route path="/success" element={<SuccessPage />} />
           <Route path="/failure" element={<FailurePage />} />
+          <Route path="/requestdemotable" element={<RequestDemoTable />} />
+          <Route path="/edit-request/:id" element={<EditDemoRequest />} />
+          <Route path="/allpayments" element={<AllPaymentsPage />} />
+          <Route path="/payment" element={<StatusPage />} />
+          
+          
+          
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -134,6 +134,9 @@ const AdminNavbar = () => {
           <NavLink to="/add-webinar-details" className={linkClass}>
             Webinars
           </NavLink>
+          <NavLink to="/allpayments" className={linkClass}>
+            Existing Members
+          </NavLink>
         </div>
 
         {/* Desktop Button */}
@@ -167,6 +170,12 @@ const AdminNavbar = () => {
             <NavLink to="/add-webinar-details" onClick={() => setIsMenuOpen(false)} className={linkClass}>
               Webinars
             </NavLink>
+            {/* <NavLink to="/requestdemotable" className={linkClass}>
+            Existing Members
+          </NavLink> */}
+          <NavLink to="/allpayments" className={linkClass}>
+            Existing Members
+          </NavLink>
             <div className="flex flex-col space-y-2 pt-2">
               <Button
                 variant="outline"
