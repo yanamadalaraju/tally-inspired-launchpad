@@ -107,141 +107,529 @@
 
 // export default FeaturesDiagram;
 
-import React from "react";
+// import React from "react";
+// import {
+//   FaChartPie,
+//   FaBalanceScale,
+//   FaMoneyBillWave,
+//   FaBoxes,
+//   FaFileAlt,
+//   FaShieldAlt,
+//   FaCogs,
+// } from "react-icons/fa";
+// import './FeaturesDiagram.css';
 
-const features = [
-  { label: "Outstanding Management", angle: -60 },
-  { label: "Cost Analysis", angle: -20 },
-  { label: "Cash Flow", angle: 20 },
-  { label: "Inventory Management", angle: 60 },
-  { label: "MIS Reports", angle: 100 },
-  { label: "Compliance", angle: 140 },
-  { label: "Adapting Technology", angle: 180 },
+// interface Feature {
+//   label: string;
+//   angle: number;
+//   icon: React.ReactNode;
+// }
+
+// const features: Feature[] = [
+//   { label: "Outstanding Management", angle: 300, icon: <FaChartPie className="text-blue-300" /> },
+//   { label: "Cost Analysis", angle: 340, icon: <FaBalanceScale className="text-blue-300" /> },
+//   { label: "Cash Flow", angle: 20, icon: <FaMoneyBillWave className="text-blue-300" /> },
+//   { label: "Inventory Management", angle: 60, icon: <FaBoxes className="text-blue-300" /> },
+//   { label: "MIS Reports", angle: 100, icon: <FaFileAlt className="text-blue-300" /> },
+//   { label: "Compliance", angle: 140, icon: <FaShieldAlt className="text-blue-300" /> },
+//   { label: "Adapting Technology", angle: 180, icon: <FaCogs className="text-blue-300" /> },
+// ];
+
+// const FeatureCircle = () => {
+//   const centerX = 200;
+//   const centerY = 200;
+//   const radius = 120;
+//   const iconDistance = 160;
+
+//   return (
+//     <div className="relative w-[400px] h-[400px] mx-auto">
+//       <svg width="100%" height="100%">
+//         {features.map((feature, idx) => {
+//           const angleRad = (feature.angle * Math.PI) / 180;
+//           const x = centerX + radius * Math.cos(angleRad);
+//           const y = centerY + radius * Math.sin(angleRad);
+
+//           const iconX = centerX + iconDistance * Math.cos(angleRad);
+//           const iconY = centerY + iconDistance * Math.sin(angleRad);
+
+//           return (
+//             <React.Fragment key={idx}>
+//               <defs>
+//                 <marker
+//                   id={`arrowhead-${idx}`}
+//                   markerWidth="10"
+//                   markerHeight="10"
+//                   refX="5"
+//                   refY="5"
+//                   orient="auto-start-reverse"
+//                   markerUnits="strokeWidth"
+//                 >
+//                   <path d="M0,0 L10,5 L0,10 Z" fill="#60a5fa" />
+//                 </marker>
+//               </defs>
+
+//               {/* Arrow line */}
+//               <line
+//                 x1={centerX}
+//                 y1={centerY}
+//                 x2={x}
+//                 y2={y}
+//                 stroke="#60a5fa"
+//                 strokeWidth="2"
+//                 markerEnd={`url(#arrowhead-${idx})`}
+//               />
+
+//               {/* Icon + label */}
+//               <foreignObject
+//                 x={iconX - 40}
+//                 y={iconY - 20}
+//                 width={80}
+//                 height={40}
+//               >
+//                 <div className="flex items-center justify-center text-center text-[10px] font-medium text-blue-300">
+//                   <div className="flex flex-col items-center">
+//                     <div className="text-lg">{feature.icon}</div>
+//                     <div className="mt-1">{feature.label}</div>
+//                   </div>
+//                 </div>
+//               </foreignObject>
+//             </React.Fragment>
+//           );
+//         })}
+
+//         {/* Center Circle */}
+//         <circle
+//           cx={centerX}
+//           cy={centerY}
+//           r="30"
+//           fill="#1e3a8a"
+//           className="drop-shadow-md"
+//         />
+//         <text
+//           x={centerX}
+//           y={centerY + 5}
+//           textAnchor="middle"
+//           fill="#fff"
+//           fontSize="10"
+//           fontWeight="bold"
+//         >
+//           Features
+//         </text>
+//       </svg>
+//     </div>
+//   );
+// };
+
+// export default FeatureCircle;
+
+
+
+// import React from "react";
+// import './FeaturesDiagram.css';
+// import { FaChartPie, FaBalanceScale, FaMoneyBillWave, FaBoxes, FaFileAlt, FaShieldAlt, FaCogs } from "react-icons/fa";
+
+// interface Feature {
+//   label: string;
+//   icon: JSX.Element;
+// }
+
+// const features: Feature[] = [
+//   { label: "Outstanding Management", icon: <FaChartPie className="text-blue-300" /> },
+//   { label: "Cost Analysis", icon: <FaBalanceScale className="text-blue-300" /> },
+//   { label: "Cash Flow", icon: <FaMoneyBillWave className="text-blue-300" /> },
+//   { label: "Inventory Management", icon: <FaBoxes className="text-blue-300" /> },
+//   { label: "MIS Reports", icon: <FaFileAlt className="text-blue-300" /> },
+//   { label: "Compliance", icon: <FaShieldAlt className="text-blue-300" /> },
+//   { label: "Adapting Technology", icon: <FaCogs className="text-blue-300" /> },
+// ];
+
+// const degToRad = (deg: number): number => (deg * Math.PI) / 180;
+// const outerRadius = 200;
+// const innerRadius = 80;
+
+// const FeaturesDiagram: React.FC = () => {
+//   return (
+//     <section className="flex justify-center items-center py-28 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+//       {/* Background glow */}
+//       <div className="absolute inset-0 opacity-20">
+//         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-blue-600 blur-3xl opacity-30"></div>
+//         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-indigo-600 blur-3xl opacity-30"></div>
+//       </div>
+
+//       <div className="relative w-[500px] h-[500px] z-10">
+//         {/* Rotating rings */}
+//         <div className="absolute top-1/2 left-1/2 w-[420px] h-[420px] border-2 border-blue-400/30 rounded-full -translate-x-1/2 -translate-y-1/2 animate-spin-slow"></div>
+//         <div className="absolute top-1/2 left-1/2 w-[380px] h-[380px] border-2 border-blue-400/20 rounded-full -translate-x-1/2 -translate-y-1/2 animate-spin-slow-reverse"></div>
+
+//         {/* Core circle */}
+//         <div className="absolute top-1/2 left-1/2 w-44 h-44 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 rounded-full flex items-center justify-center text-white font-bold text-xl tracking-wide shadow-[0_0_40px_10px_rgba(59,130,246,0.5)] animate-pulse-slow select-none border-4 border-white/10 backdrop-blur-md -translate-x-1/2 -translate-y-1/2 z-10">
+//           <div className="text-center">
+//             <div className="text-2xl font-extrabold mb-1">Your Business</div>
+//             <div className="text-xs font-light opacity-80">CORE SYSTEM</div>
+//           </div>
+//         </div>
+
+//         {/* Arrows and features */}
+//         {features.map(({ label, icon }, idx) => {
+//           const angle = (360 / features.length) * idx - 90; // -90 to start from top
+//           const rad = degToRad(angle);
+//           const outerX = 250 + outerRadius * Math.cos(rad);
+//           const outerY = 250 + outerRadius * Math.sin(rad);
+//           const innerX = 250 + innerRadius * Math.cos(rad);
+//           const innerY = 250 + innerRadius * Math.sin(rad);
+
+//           return (
+//             <React.Fragment key={idx}>
+//               <svg className="absolute top-0 left-0 w-full h-full pointer-events-none" width="500" height="500">
+//                 <defs>
+//                   <linearGradient id={`lineGradient-${idx}`} x1="0%" y1="0%" x2="100%" y2="0%">
+//                     <stop offset="0%" stopColor="#60a5fa" stopOpacity="1" />
+//                     <stop offset="100%" stopColor="#818cf8" stopOpacity="0.9" />
+//                   </linearGradient>
+//                   <filter id={`glow-${idx}`} x="-50%" y="-50%" width="200%" height="200%">
+//                     <feGaussianBlur stdDeviation="4" result="blur" />
+//                     <feComposite in="SourceGraphic" in2="blur" operator="over" />
+//                   </filter>
+//                   <marker id={`arrowhead-${idx}`} markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+//                     <path d="M0,0 L12,6 L0,12 Z" fill="#60a5fa" />
+//                   </marker>
+//                 </defs>
+//                 <line
+//                   x1={innerX}
+//                   y1={innerY}
+//                   x2={outerX - Math.cos(rad) * 28}
+//                   y2={outerY - Math.sin(rad) * 28}
+//                   stroke={`url(#lineGradient-${idx})`}
+//                   strokeWidth="2.5"
+//                   markerEnd={`url(#arrowhead-${idx})`}
+//                   filter={`url(#glow-${idx})`}
+//                   className="opacity-0 animate-fade-slide"
+//                   style={{
+//                     animationDelay: `${idx * 0.15}s`,
+//                     animationFillMode: "forwards"
+//                   }}
+//                 />
+//               </svg>
+
+//               <div
+//                 className="absolute z-20 flex flex-col items-center text-center cursor-pointer select-none transition-all duration-500 hover:scale-110 group"
+//                 style={{
+//                   left: outerX,
+//                   top: outerY,
+//                   transform: "translate(-50%, -50%)",
+//                 }}
+//                 title={label}
+//               >
+//                 <div className="flex flex-col items-center gap-2 p-3 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700/50 shadow-lg group-hover:shadow-xl group-hover:border-blue-400/50 transition-all duration-300">
+//                   <div className="p-3 rounded-full bg-gradient-to-br from-blue-700 to-blue-800 shadow-inner group-hover:from-blue-600 group-hover:to-blue-700 transition-all duration-300">
+//                     {icon}
+//                   </div>
+//                   <span className="text-sm font-medium text-gray-200 whitespace-nowrap">
+//                     {label}
+//                   </span>
+//                 </div>
+//               </div>
+//             </React.Fragment>
+//           );
+//         })}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default FeaturesDiagram;
+
+// import React, { useEffect, useRef, useState } from "react";
+// import {
+//   FaChartPie,
+//   FaBalanceScale,
+//   FaMoneyBillWave,
+//   FaBoxes,
+//   FaFileAlt,
+//   FaShieldAlt,
+//   FaCogs,
+// } from "react-icons/fa";
+// import './FeaturesDiagram.css';
+// import { useInView } from 'react-intersection-observer';
+
+// interface Feature {
+//   label: string;
+//   angle: number;
+//   icon: React.ReactNode;
+// }
+
+// const features: Feature[] = [
+//   { label: "Outstanding Management", angle: 300, icon: <FaChartPie /> },
+//   { label: "Cost Analysis", angle: 340, icon: <FaBalanceScale /> },
+//   { label: "Cash Flow", angle: 20, icon: <FaMoneyBillWave /> },
+//   { label: "Inventory Management", angle: 60, icon: <FaBoxes /> },
+//   { label: "MIS Reports", angle: 100, icon: <FaFileAlt /> },
+//   { label: "Compliance", angle: 140, icon: <FaShieldAlt /> },
+//   { label: "Adapting Technology", angle: 180, icon: <FaCogs /> },
+// ];
+
+// const FeatureCircle = () => {
+//   const centerX = 300;
+//   const centerY = 300;
+//   const radius = 180;
+//   const iconDistance = 250;
+//   const [animationStarted, setAnimationStarted] = useState(false);
+//   const [ref, inView] = useInView({
+//     triggerOnce: true,
+//     threshold: 0.5,
+//   });
+
+//   useEffect(() => {
+//     if (inView) {
+//       setAnimationStarted(true);
+//     }
+//   }, [inView]);
+
+//   return (
+//     <div ref={ref} className="flex justify-start pl-4">
+//       <div className="relative w-[600px] h-[600px]">
+//         <svg width="100%" height="100%">
+//           <defs>
+//             {features.map((_, idx) => (
+//               <marker
+//                 key={idx}
+//                 id={`arrowhead-${idx}`}
+//                 markerWidth="10"
+//                 markerHeight="10"
+//                 refX="6"
+//                 refY="5"
+//                 orient="auto"
+//                 markerUnits="strokeWidth"
+//               >
+//                 <path d="M0,0 L10,5 L0,10 Z" fill="#3b82f6" />
+//               </marker>
+//             ))}
+//           </defs>
+
+//           {features.map((feature, idx) => {
+//             const angleRad = (feature.angle * Math.PI) / 180;
+//             const x = centerX + radius * Math.cos(angleRad);
+//             const y = centerY + radius * Math.sin(angleRad);
+
+//             const iconX = centerX + iconDistance * Math.cos(angleRad);
+//             const iconY = centerY + iconDistance * Math.sin(angleRad);
+
+//             return (
+//               <React.Fragment key={idx}>
+//                 {/* Arrow line with animation */}
+//                 <line
+//                   x1={centerX}
+//                   y1={centerY}
+//                   x2={x}
+//                   y2={y}
+//                   stroke="#3b82f6"
+//                   strokeWidth="2"
+//                   markerEnd={`url(#arrowhead-${idx})`}
+//                   className={`animated-arrow ${animationStarted ? 'animate-draw' : ''}`}
+//                   style={{
+//                     animationDelay: `${idx * 0.1}s`,
+//                     opacity: animationStarted ? 1 : 0
+//                   }}
+//                 />
+
+//                 {/* Icon + Label with animation */}
+//                 <foreignObject
+//                   x={iconX - 60}
+//                   y={iconY - 30}
+//                   width={120}
+//                   height={60}
+//                   style={{
+//                     opacity: animationStarted ? 1 : 0,
+//                     transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s, transform 0.3s ease`
+//                   }}
+//                 >
+//                   <div className="feature-label">
+//                     <div className="flex flex-col items-center">
+//                       <div className="text-3xl hover:text-blue-800 transition-colors duration-300">
+//                         {feature.icon}
+//                       </div>
+//                       <div className="text-sm mt-1">{feature.label}</div>
+//                     </div>
+//                   </div>
+//                 </foreignObject>
+//               </React.Fragment>
+//             );
+//           })}
+
+//           {/* Center Circle with animation */}
+//           <circle
+//             cx={centerX}
+//             cy={centerY}
+//             r="45"
+//             fill="#1e3a8a"
+//             className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
+//             style={{
+//               transition: 'transform 0.5s ease',
+//               transformOrigin: 'center'
+//             }}
+//           />
+//           <text
+//             x={centerX}
+//             y={centerY + 5}
+//             textAnchor="middle"
+//             fill="#fff"
+//             fontSize="14"
+//             fontWeight="bold"
+//             style={{
+//               opacity: animationStarted ? 1 : 0,
+//               transition: 'opacity 0.5s ease 0.5s'
+//             }}
+//           >
+//             Features
+//           </text>
+//         </svg>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default FeatureCircle;
+import React, { useEffect, useState } from "react";
+import {
+  FaChartPie, FaBalanceScale, FaMoneyBillWave,
+  FaBoxes, FaFileAlt, FaShieldAlt, FaCogs,
+} from "react-icons/fa";
+import './FeaturesDiagram.css';
+import { useInView } from 'react-intersection-observer';
+import outstandingIcon from "../assets/outstanding.webp";
+import costIcon from "../assets/cost.jpg";
+import cashIcon from "../assets/cashflow.jpeg";
+import inventoryIcon from "../assets/inventorymanagement.jpg";
+import misIcon from "../assets/misreports.jpg";
+import complianceIcon from "../assets/Compliance.jpg";
+import techIcon from "../assets/adapttechnology.jpg";
+
+interface Feature {
+  label: string;
+  angle: number;
+  icon: React.ReactNode;
+  image: string;
+  description: string;
+}
+
+const features: Feature[] = [
+  { label: "Outstanding Management", angle: 300, icon: <FaChartPie />, image: outstandingIcon, description: "Manage operations with clarity and insight using our intelligent tools." },
+  { label: "Cost Analysis", angle: 340, icon: <FaBalanceScale />, image: costIcon, description: "Deep-dive into your expenses and optimize budgets efficiently." },
+  { label: "Cash Flow", angle: 20, icon: <FaMoneyBillWave />, image: cashIcon, description: "Track and forecast cash flow with real-time insights." },
+  { label: "Inventory Management", angle: 60, icon: <FaBoxes />, image: inventoryIcon, description: "Streamline inventory levels and avoid stock-outs with precision." },
+  { label: "MIS Reports", angle: 100, icon: <FaFileAlt />, image: misIcon, description: "Generate rich reports that illuminate business performance." },
+  { label: "Compliance", angle: 140, icon: <FaShieldAlt />, image: complianceIcon, description: "Stay compliant with industry regulations effortlessly." },
+  { label: "Adapting Technology", angle: 180, icon: <FaCogs />, image: techIcon, description: "Embrace modern tech to future-proof your operations." },
 ];
 
-const degToRad = (deg: number) => (deg * Math.PI) / 180;
-const radius = 150;
+const FeatureCircle = () => {
+  const [animationStarted, setAnimationStarted] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 });
 
-const FeaturesDiagram: React.FC = () => {
+  const isSmallScreen = window.innerWidth < 768;
+  const centerX = isSmallScreen ? 160 : 300;
+  const centerY = isSmallScreen ? 160 : 300;
+  const radius = isSmallScreen ? 100 : 180;
+  const iconDistance = isSmallScreen ? 130 : 250;
+  const svgSize = isSmallScreen ? 320 : 600;
+
+  useEffect(() => {
+    if (inView) setAnimationStarted(true);
+  }, [inView]);
+
   return (
-    <section className="flex justify-center items-center py-28 bg-gradient-to-b from-gray-900 to-black">
-      <div className="relative w-[460px] h-[460px]">
-        {/* Rotating ring behind center */}
-        <div className="absolute top-1/2 left-1/2 w-[280px] h-[280px] border-4 border-blue-500 rounded-full opacity-30 animate-spin-slow -translate-x-1/2 -translate-y-1/2" />
+    <div ref={ref} className="flex flex-col md:flex-row gap-8 px-4 py-8 items-center justify-center w-full">
+      {/* Circle SVG */}
+      <div className={`relative w-[${svgSize}px] h-[${svgSize}px]`}>
+        <svg width={svgSize} height={svgSize}>
+          <defs>
+            {features.map((_, idx) => (
+              <marker key={idx} id={`arrowhead-${idx}`} markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#3b82f6" />
+              </marker>
+            ))}
+          </defs>
 
-        {/* Center Circle with pulse */}
-        <div className="absolute top-1/2 left-1/2 w-40 h-40 bg-gradient-to-br from-blue-400 to-indigo-600 rounded-full flex items-center justify-center text-white font-extrabold text-2xl -translate-x-1/2 -translate-y-1/2 shadow-[0_0_25px_#3b82f6] animate-pulse-slow select-none">
-          Your Business
-        </div>
+          {features.map((feature, idx) => {
+            const angleRad = (feature.angle * Math.PI) / 180;
+            const x = centerX + radius * Math.cos(angleRad);
+            const y = centerY + radius * Math.sin(angleRad);
+            const iconX = centerX + iconDistance * Math.cos(angleRad);
+            const iconY = centerY + iconDistance * Math.sin(angleRad);
 
-        {features.map(({ label, angle }, idx) => {
-          const rad = degToRad(angle);
-          const x = 230 + radius * Math.cos(rad);
-          const y = 230 + radius * Math.sin(rad);
-          const arrowLength = radius - 50;
-
-          const arrowX = 230 + arrowLength * Math.cos(rad);
-          const arrowY = 230 + arrowLength * Math.sin(rad);
-
-          return (
-            <div key={idx}>
-              {/* Glowing Arrow SVG */}
-              <svg
-                className="absolute top-0 left-0 pointer-events-none"
-                width="460"
-                height="460"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <defs>
-                  <filter id={`glow-${idx}`} x="-50%" y="-50%" width="200%" height="200%" >
-                    <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#60a5fa" floodOpacity="0.8"/>
-                    <feDropShadow dx="0" dy="0" stdDeviation="8" floodColor="#3b82f6" floodOpacity="0.6"/>
-                  </filter>
-                  <marker
-                    id={`arrowhead-${idx}`}
-                    markerWidth="10"
-                    markerHeight="10"
-                    refX="6"
-                    refY="5"
-                    orient="auto"
-                    markerUnits="strokeWidth"
-                  >
-                    <path d="M0,0 L10,5 L0,10 L3,5 Z" fill="#60a5fa" />
-                  </marker>
-                </defs>
+            return (
+              <React.Fragment key={idx}>
                 <line
-                  x1="230"
-                  y1="230"
-                  x2={arrowX}
-                  y2={arrowY}
-                  stroke="#60a5fa"
-                  strokeWidth="4"
+                  x1={centerX}
+                  y1={centerY}
+                  x2={x}
+                  y2={y}
+                  stroke="#3b82f6"
+                  strokeWidth="2"
                   markerEnd={`url(#arrowhead-${idx})`}
-                  filter={`url(#glow-${idx})`}
-                  className="opacity-0 animate-fade-slide"
-                  style={{ animationDelay: `${idx * 0.18}s`, animationFillMode: "forwards" }}
+                  className={`animated-arrow ${animationStarted ? 'animate-draw' : ''}`}
+                  style={{
+                    animationDelay: `${idx * 0.1}s`,
+                    opacity: animationStarted ? 1 : 0
+                  }}
                 />
-              </svg>
+                <foreignObject
+                  x={iconX - 60}
+                  y={iconY - 30}
+                  width={120}
+                  height={60}
+                  style={{
+                    opacity: animationStarted ? 1 : 0,
+                    transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s, transform 0.3s ease`
+                  }}
+                >
+                  <div className="feature-label" onClick={() => setSelectedFeature(feature)}>
+                    <div className="flex flex-col items-center">
+                      <div className="text-2xl md:text-3xl hover:text-blue-800 transition-colors duration-300">
+                        {feature.icon}
+                      </div>
+                      <div className="text-xs md:text-sm mt-1 text-center">{feature.label}</div>
+                    </div>
+                  </div>
+                </foreignObject>
+              </React.Fragment>
+            );
+          })}
 
-              {/* Feature Label with glowing effect */}
-              <div
-                className="absolute flex flex-col items-center text-center w-36 cursor-pointer select-none transition-transform duration-300 hover:scale-110"
-                style={{ left: x, top: y, transform: "translate(-50%, -50%)" }}
-                title={label}
-              >
-                <div className="mb-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold text-lg shadow-[0_0_12px_#2563eb] hover:shadow-[0_0_20px_#3b82f6] transition-shadow duration-300">
-                  {label}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
+          <circle cx={centerX} cy={centerY} r={isSmallScreen ? 30 : 45} fill="#1e3a8a" className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
+            style={{ transition: 'transform 0.5s ease', transformOrigin: 'center' }} />
+          <text
+            x={centerX}
+            y={centerY + 5}
+            textAnchor="middle"
+            fill="#fff"
+            fontSize="14"
+            fontWeight="bold"
+            style={{
+              opacity: animationStarted ? 1 : 0,
+              transition: 'opacity 0.5s ease 0.5s'
+            }}
+          >
+            Features
+          </text>
+        </svg>
       </div>
 
-      {/* Extra Tailwind Animations */}
-      <style>{`
-        @keyframes fade-slide {
-          0% {
-            opacity: 0;
-            transform: translateY(15px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fade-slide {
-          animation-name: fade-slide;
-          animation-duration: 0.7s;
-          animation-timing-function: ease-out;
-          animation-fill-mode: forwards;
-        }
-        @keyframes pulse-slow {
-          0%, 100% {
-            box-shadow: 0 0 25px 5px #3b82f6;
-          }
-          50% {
-            box-shadow: 0 0 40px 10px #60a5fa;
-          }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
-        }
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 40s linear infinite;
-        }
-      `}</style>
-    </section>
+      {/* Detail Panel */}
+      {selectedFeature && (
+        <div className="w-full md:w-[400px] bg-white shadow-2xl rounded-2xl p-6 mt-4 md:mt-35 transition-all duration-500">
+          <h2 className="text-lg md:text-xl font-bold text-blue-900 mb-2 flex items-center gap-2">
+            <span className="text-2xl">{selectedFeature.icon}</span>
+            {selectedFeature.label}
+          </h2>
+          <img src={selectedFeature.image} alt={selectedFeature.label} className="rounded-xl mb-3 w-full object-cover h-40 md:h-48" />
+          <p className="text-gray-700 text-sm md:text-base">{selectedFeature.description}</p>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default FeaturesDiagram;
+export default FeatureCircle;
+
