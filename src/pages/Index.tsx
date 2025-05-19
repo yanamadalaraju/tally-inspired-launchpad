@@ -16,9 +16,11 @@ import growthImage from '../assets/engagement_feature.jpg'
 import VideoAdSection from '@/components/VideoAdSection';
 import CountdownSection from '@/components/CountdownSection';
 import PartnersSection from '@/components/PartnersSection';
-import image from '../assets/pexelmoney.webp'
+import image from '../assets/pexelmoney.webp';
 import CarouselSection from '@/components/CarouselSection';
 import FAQSection from '@/components/FAQSection';
+import BusinessJourney from '@/components/BusinessJourney';
+import FeaturesDiagram from '@/components/FeaturesDiagram';
 
 const Index = () => {
 
@@ -94,6 +96,8 @@ const Index = () => {
     <div className="min-h-screen">
       <Navbar />
       <HeroSection />
+      <BusinessJourney />
+      <FeaturesDiagram />
       <ValueProposition />
       <div>
       <GrowthSection imageUrl={growthImage} />
@@ -151,9 +155,9 @@ const Index = () => {
       {/* <CarouselSection /> */}
       <TestimonialsSection />
 
-      <VideoAdSection />
+      {/* <VideoAdSection /> */}
       <CountdownSection />
-      <PartnersSection />
+      {/* <PartnersSection /> */}
        {/* Features Section */}
        <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -189,7 +193,7 @@ const Index = () => {
       </section>
 
        {/* FAQ Section */}
-       <section className="py-4 mt-[40px] bg-[#F7FAFC] rounded-2xl">
+       {/* <section className="py-4 mt-[40px] bg-[#F7FAFC] rounded-2xl">
   <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
     <ScrollAnimateWrapper animation="fade-up">
       <div className="text-center mb-6">
@@ -231,7 +235,7 @@ Get Expert Help
       </ScrollAnimateWrapper>
     </div>
   </div>
-</section>
+</section> */}
       
       <Footer />
     </div>
