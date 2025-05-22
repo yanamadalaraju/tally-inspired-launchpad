@@ -21,6 +21,10 @@ import CarouselSection from '@/components/CarouselSection';
 import FAQSection from '@/components/FAQSection';
 import BusinessJourney from '@/components/BusinessJourney';
 import FeaturesDiagram from '@/components/FeaturesDiagram';
+import DashboardSection from '@/components/newcustomer/DashboardSection';
+
+import HeroSectionss from '@/components/newcustomer/HeroSectionss';
+import SendEmailPage from '@/components/newcustomer/SendEmailPage';
 
 const Index = () => {
 
@@ -191,6 +195,8 @@ const Index = () => {
           </div>
         </div>
       </section>
+      
+      
 
        {/* FAQ Section */}
        {/* <section className="py-4 mt-[40px] bg-[#F7FAFC] rounded-2xl">
@@ -236,6 +242,7 @@ Get Expert Help
     </div>
   </div>
 </section> */}
+       
       
       <Footer />
     </div>

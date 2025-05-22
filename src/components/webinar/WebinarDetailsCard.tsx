@@ -153,7 +153,6 @@ const WebinarDetailsCard = ({ title, date, time, ampm, duration, presenters, tak
 
   return (
     <div className="relative w-full max-w-2xl h-[65vh] bg-white rounded-lg p-4 sm:p-6 mb-6 border border-gray-200 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-
       {/* Fading Overlay + Message when content overflows */}
       {isOverflowing && (
         <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent z-10 flex items-end justify-center pointer-events-none">
@@ -207,4 +206,3 @@ const WebinarDetailsCard = ({ title, date, time, ampm, duration, presenters, tak
 };
 
 export default WebinarDetailsCard;
-

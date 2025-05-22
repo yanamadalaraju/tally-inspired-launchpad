@@ -533,6 +533,7 @@ const RegistrationsList = () => {
                   ['name', 'Name'],
                   ['phone', 'Phone'],
                   ['email', 'Email'],
+                  ['webinar_id', 'Webinar_id'],
                   // ['pincode', 'Pincode'],
                   ['created_at', 'Created At'],
                   ['business_type', 'Business Type'],
@@ -556,6 +557,7 @@ const RegistrationsList = () => {
     <td className="px-6 py-2">{reg.name}</td>
     <td className="px-6 py-2">{reg.phone}</td>
     <td className="px-6 py-2">{reg.email}</td>
+    <td className="px-6 py-2">{reg.webinar_id}</td>
     {/* <td className="px-6 py-2">{reg.pincode}</td> */}
     <td className="px-6 py-2">
   {new Date(reg.created_at).toLocaleDateString('en-IN', {

@@ -224,39 +224,54 @@
 // };
 
 // export default WebinarForm;
-
 import React, { useEffect, useState } from 'react';
 import WebinarBenefits from './webinar/WebinarBenefits';
 import WebinarDetailsCard from './webinar/WebinarDetailsCard';
 import WebinarStatsBanner from './webinar/WebinarStatsBanner';
 import Image from '../assets/business-marketing.jpg';
-import FAQSection from './FAQSection';
 import axios from 'axios';
 import baseURL from '@/Api';
 
+interface Webinar {
+  id: number;
+  title: string;
+  date: string;
+  time: string;
+  ampm: string;
+  duration: string;
+  presenters: string;
+  takeaways: string[];
+}
+
 const WebinarForm = () => {
-  const [webinars, setWebinars] = useState([]);
-  const [recentWebinar, setRecentWebinar] = useState(null);
+  const [webinars, setWebinars] = useState<Webinar[]>([]);
+  const [recentWebinar, setRecentWebinar] = useState<Webinar | null>(null);
 
   useEffect(() => {
     const fetchWebinars = async () => {
       try {
         const response = await axios.get(`${baseURL}/webinars`);
-        const formattedData = response.data.map(w => ({
+        const formattedData: Webinar[] = response.data.map((w: any) => ({
           ...w,
           takeaways: JSON.parse(w.takeaways || '[]'),
         }));
         setWebinars(formattedData);
-        
-        // Find the most recent webinar
-        if (formattedData.length > 0) {
-          const mostRecent = formattedData.reduce((latest, current) => {
-            const latestDate = new Date(latest.date);
-            const currentDate = new Date(current.date);
-            return currentDate > latestDate ? current : latest;
+
+        // Use the same getMostRecentWebinar logic here
+        const getMostRecentWebinar = (webinars: Webinar[]): Webinar | null => {
+          if (webinars.length === 0) return null;
+
+          const sorted = [...webinars].sort((a, b) => {
+            const dateA = new Date(`${a.date} ${a.time} ${a.ampm}`).getTime();
+            const dateB = new Date(`${b.date} ${b.time} ${b.ampm}`).getTime();
+            return dateB - dateA;
           });
-          setRecentWebinar(mostRecent);
-        }
+
+          return sorted[0];
+        };
+
+        const mostRecent = getMostRecentWebinar(formattedData);
+        setRecentWebinar(mostRecent);
       } catch (error) {
         console.error('Error fetching webinars:', error);
       }
