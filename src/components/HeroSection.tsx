@@ -490,38 +490,7 @@ const HeroSection = () => {
     });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { role, name, phone, email, pincode } = formData;
-
-  //   if (role && name && phone && email && pincode) {
-  //     setLoading(true); // Start loading
-  //     try {
-  //       const response = await fetch(`${baseURL}/submit-form`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(formData),
-  //       });
-
-  //       if (response.ok) {
-  //         setFormSubmitted(true);
-  //         setMessage('✅ Registration Successful! You will receive an email shortly.');
-  //       } else {
-  //         setMessage('❌ Error submitting form. Please try again.');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error submitting form:', error);
-  //       setMessage('❌ Error submitting form. Please try again.');
-  //     } finally {
-  //       setLoading(false); // Stop loading
-  //     }
-  //   } else {
-  //     handleFormShake();
-  //     setMessage('❌ Please fill all required fields.');
-  //   }
-  // };
+  
 const handleSubmit = async (e) => {
   e.preventDefault();
   const { role, name, phone, email, pincode } = formData;
