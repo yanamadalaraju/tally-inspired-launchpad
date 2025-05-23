@@ -97,7 +97,6 @@
 } */
 
 /* Additional hover or animation styles */
-/* FeaturesDiagram.css */
 svg text {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -106,13 +105,29 @@ svg text {
   color: #3b82f6;
   font-weight: 600;
   text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .feature-label:hover {
+  transform: scale(1.1);
+}
+
+.active-icon {
   color: #1e40af;
-  transform: scale(1.05);
+  transform: scale(1.2);
+}
+
+.glow {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 5px #60a5fa, 0 0 10px #60a5fa;
+  }
+  50% {
+    text-shadow: 0 0 10px #1e40af, 0 0 20px #1e40af;
+  }
 }
 
 .animated-arrow {
@@ -125,18 +140,58 @@ svg text {
   stroke-dashoffset: 0;
 }
 
-@keyframes fadeIn {
+@keyframes fadeInCard {
   from {
-    transform: translateX(30px);
+    transform: translateY(20px);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.6s ease forwards;
+.animate-fadeInCard {
+  animation: fadeInCard 0.6s ease forwards;
 }
 
+.feature-card {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.feature-title {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.feature-image {
+  border-radius: 14px;
+  width: 100%;
+  object-fit: cover;
+  height: 160px;
+  margin-bottom: 10px;
+}
+
+.feature-desc {
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+}
+
+.feature-svg-wrapper {
+  width: fit-content;
+  height: fit-content;
+  max-width: 100%;
+}

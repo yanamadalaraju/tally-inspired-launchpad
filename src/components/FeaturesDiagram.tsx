@@ -522,26 +522,37 @@ const features: Feature[] = [
   { label: "Adapting Technology", angle: 180, icon: <FaCogs />, image: techIcon, description: "Embrace modern tech to future-proof your operations." },
 ];
 
+// ... [unchanged imports]
+import './FeaturesDiagram.css'; // Ensure this is linked
+// ... [same imports as before]
+
 const FeatureCircle = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
-  const [selectedFeature, setSelectedFeature] = useState<Feature | null>(null);
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.4 });
 
   const isSmallScreen = window.innerWidth < 768;
-  const centerX = isSmallScreen ? 160 : 300;
-  const centerY = isSmallScreen ? 160 : 300;
-  const radius = isSmallScreen ? 100 : 180;
-  const iconDistance = isSmallScreen ? 130 : 250;
-  const svgSize = isSmallScreen ? 320 : 600;
+  const centerX = isSmallScreen ? 120 : 220;
+  const centerY = isSmallScreen ? 120 : 220;
+  const radius = isSmallScreen ? 70 : 120;
+  const iconDistance = isSmallScreen ? 100 : 170;
+  const svgSize = isSmallScreen ? 240 : 440;
 
   useEffect(() => {
-    if (inView) setAnimationStarted(true);
+    if (inView) {
+      setAnimationStarted(true);
+      const interval = setInterval(() => {
+        setSelectedIndex(prev => (prev + 1) % features.length);
+      }, 3500);
+      return () => clearInterval(interval);
+    }
   }, [inView]);
 
+  const selectedFeature = features[selectedIndex];
+
   return (
-    <div ref={ref} className="flex flex-col md:flex-row gap-8 px-4 py-8 items-center justify-center w-full">
-      {/* Circle SVG */}
-      <div className={`relative w-[${svgSize}px] h-[${svgSize}px]`}>
+    <div ref={ref} className="flex flex-col md:flex-row gap-8 px-2 py-6 items-center justify-center w-full">
+      <div className="relative feature-svg-wrapper">
         <svg width={svgSize} height={svgSize}>
           <defs>
             {features.map((_, idx) => (
@@ -557,6 +568,7 @@ const FeatureCircle = () => {
             const y = centerY + radius * Math.sin(angleRad);
             const iconX = centerX + iconDistance * Math.cos(angleRad);
             const iconY = centerY + iconDistance * Math.sin(angleRad);
+            const isActive = idx === selectedIndex;
 
             return (
               <React.Fragment key={idx}>
@@ -575,21 +587,19 @@ const FeatureCircle = () => {
                   }}
                 />
                 <foreignObject
-                  x={iconX - 60}
-                  y={iconY - 30}
-                  width={120}
-                  height={60}
+                  x={iconX - 50}
+                  y={iconY - 25}
+                  width={100}
+                  height={50}
                   style={{
                     opacity: animationStarted ? 1 : 0,
-                    transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s, transform 0.3s ease`
+                    transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s`
                   }}
                 >
-                  <div className="feature-label" onClick={() => setSelectedFeature(feature)}>
+                  <div className={`feature-label ${isActive ? 'active-icon glow' : ''}`}>
                     <div className="flex flex-col items-center">
-                      <div className="text-2xl md:text-3xl hover:text-blue-800 transition-colors duration-300">
-                        {feature.icon}
-                      </div>
-                      <div className="text-xs md:text-sm mt-1 text-center">{feature.label}</div>
+                      <div className="text-xl md:text-2xl">{feature.icon}</div>
+                      <div className="text-xs text-center mt-1">{feature.label}</div>
                     </div>
                   </div>
                 </foreignObject>
@@ -597,14 +607,14 @@ const FeatureCircle = () => {
             );
           })}
 
-          <circle cx={centerX} cy={centerY} r={isSmallScreen ? 30 : 45} fill="#1e3a8a" className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
+          <circle cx={centerX} cy={centerY} r={isSmallScreen ? 25 : 35} fill="#1e3a8a" className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
             style={{ transition: 'transform 0.5s ease', transformOrigin: 'center' }} />
           <text
             x={centerX}
             y={centerY + 5}
             textAnchor="middle"
             fill="#fff"
-            fontSize="14"
+            fontSize="13"
             fontWeight="bold"
             style={{
               opacity: animationStarted ? 1 : 0,
@@ -616,15 +626,14 @@ const FeatureCircle = () => {
         </svg>
       </div>
 
-      {/* Detail Panel */}
       {selectedFeature && (
-        <div className="w-full md:w-[400px] bg-white shadow-2xl rounded-2xl p-6 mt-4 md:mt-35 transition-all duration-500">
-          <h2 className="text-lg md:text-xl font-bold text-blue-900 mb-2 flex items-center gap-2">
-            <span className="text-2xl">{selectedFeature.icon}</span>
+        <div className="feature-card animate-fadeInCard">
+          <h2 className="feature-title">
+            <span className="text-xl">{selectedFeature.icon}</span>
             {selectedFeature.label}
           </h2>
-          <img src={selectedFeature.image} alt={selectedFeature.label} className="rounded-xl mb-3 w-full object-cover h-40 md:h-48" />
-          <p className="text-gray-700 text-sm md:text-base">{selectedFeature.description}</p>
+          <img src={selectedFeature.image} alt={selectedFeature.label} className="feature-image" />
+          <p className="feature-desc">{selectedFeature.description}</p>
         </div>
       )}
     </div>
@@ -632,4 +641,3 @@ const FeatureCircle = () => {
 };
 
 export default FeatureCircle;
-
