@@ -14,27 +14,27 @@ const TestimonialsSection = () => {
   };
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      position: "CFO, Tech Innovators Inc.",
+      name: "CHANDRASHEKHAR",
+      position: "Mohan & Chandrashekhar CA Firm",
       company: "Tech Innovators",
       image: null, // Will use fallback
-      content: "BizManager has completely transformed how we handle our accounting and inventory. The GST compliance features alone have saved us countless hours of work every month.",
+      content: "During the pandemic, when there were lot of restrictions, when everyone had to sit at home and complete their book of accounts, Tally was really handy, where we could actually login remotely in our server, login through the servers of our clients and access data from them and finalize accounts. I cannot imagine how we could have finalized such accounts without Tally.",
       rating: 5
     },
     {
-      name: "Michael Chen",
-      position: "Owner, Chen's Retail",
-      company: "Chen's Retail",
+      name: "NEERAJ KHANDELWAL",
+      position: "Laxmi Educations",
+      company: "Laxmi Educations",
       image: null, // Will use fallback
-      content: "As a small business owner, I needed an all-in-one solution that wouldn't break the bank. This software delivers on all fronts with excellent support when I need help.",
+      content: "Tally helps us with our GST rates and HSN numbers clarification and verification and with many more things such as GSTR-2A and GSTR-2B reconciliation. For 2A & 2B reconciliation, we don’t have to go to the GST portal, we can do it right through Tally.",
       rating: 5
     },
     {
-      name: "Priya Patel",
+      name: "URMI PATEL",
       position: "Operations Manager, Global Services",
-      company: "Global Services",
+      company: "Bajaj Electricals",
       image: null, // Will use fallback
-      content: "The real-time reporting has given us insights we never had before. We can now make data-driven decisions quickly, which has directly improved our bottom line.",
+      content: "Tally is a very simple software; it would take around a day or two for the distributor to get accustomed to Tally, and from the next day he would be ready to do all his transactions in Tally.",
       rating: 4
     }
   ];

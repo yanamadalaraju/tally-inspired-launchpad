@@ -492,10 +492,12 @@
 import React, { useEffect, useState } from "react";
 import {
   FaChartPie, FaBalanceScale, FaMoneyBillWave,
-  FaBoxes, FaFileAlt, FaShieldAlt, FaCogs,
+  FaBoxes, FaFileAlt, FaShieldAlt, FaCogs, FaTags,
 } from "react-icons/fa";
 import './FeaturesDiagram.css';
 import { useInView } from 'react-intersection-observer';
+
+// Image imports
 import outstandingIcon from "../assets/outstanding.webp";
 import costIcon from "../assets/cost.jpg";
 import cashIcon from "../assets/cashflow.jpeg";
@@ -503,40 +505,46 @@ import inventoryIcon from "../assets/inventorymanagement.jpg";
 import misIcon from "../assets/misreports.jpg";
 import complianceIcon from "../assets/Compliance.jpg";
 import techIcon from "../assets/adapttechnology.jpg";
+import pricingIcon from "../assets/costanalysis.webp";
 
 interface Feature {
   label: string;
-  angle: number;
   icon: React.ReactNode;
   image: string;
   description: string;
 }
 
 const features: Feature[] = [
-  { label: "Outstanding Management", angle: 300, icon: <FaChartPie />, image: outstandingIcon, description: "Manage operations with clarity and insight using our intelligent tools." },
-  { label: "Cost Analysis", angle: 340, icon: <FaBalanceScale />, image: costIcon, description: "Deep-dive into your expenses and optimize budgets efficiently." },
-  { label: "Cash Flow", angle: 20, icon: <FaMoneyBillWave />, image: cashIcon, description: "Track and forecast cash flow with real-time insights." },
-  { label: "Inventory Management", angle: 60, icon: <FaBoxes />, image: inventoryIcon, description: "Streamline inventory levels and avoid stock-outs with precision." },
-  { label: "MIS Reports", angle: 100, icon: <FaFileAlt />, image: misIcon, description: "Generate rich reports that illuminate business performance." },
-  { label: "Compliance", angle: 140, icon: <FaShieldAlt />, image: complianceIcon, description: "Stay compliant with industry regulations effortlessly." },
-  { label: "Adapting Technology", angle: 180, icon: <FaCogs />, image: techIcon, description: "Embrace modern tech to future-proof your operations." },
+  { label: "Outstanding Management", icon: <FaChartPie />, image: outstandingIcon, description: "Manage operations with clarity and insight using our intelligent tools." },
+  { label: "Cost Analysis", icon: <FaBalanceScale />, image: costIcon, description: "Deep-dive into your expenses and optimize budgets efficiently." },
+  { label: "Cash Flow", icon: <FaMoneyBillWave />, image: cashIcon, description: "Track and forecast cash flow with real-time insights." },
+  { label: "Inventory Management", icon: <FaBoxes />, image: inventoryIcon, description: "Streamline inventory levels and avoid stock-outs with precision." },
+  { label: "MIS Reports", icon: <FaFileAlt />, image: misIcon, description: "Generate rich reports that illuminate business performance." },
+  { label: "Compliance", icon: <FaShieldAlt />, image: complianceIcon, description: "Stay compliant with industry regulations effortlessly." },
+  { label: "Adapting Technology", icon: <FaCogs />, image: techIcon, description: "Embrace modern tech to future-proof your operations." },
+  { label: "Multi Pricing", icon: <FaTags />, image: pricingIcon, description: "Offer flexible pricing tiers tailored to different customer segments." },
 ];
-
-// ... [unchanged imports]
-import './FeaturesDiagram.css'; // Ensure this is linked
-// ... [same imports as before]
 
 const FeatureCircle = () => {
   const [animationStarted, setAnimationStarted] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.4 });
+  const [isMobile, setIsMobile] = useState(false);
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
-  const isSmallScreen = window.innerWidth < 768;
-  const centerX = isSmallScreen ? 120 : 220;
-  const centerY = isSmallScreen ? 120 : 220;
-  const radius = isSmallScreen ? 70 : 120;
-  const iconDistance = isSmallScreen ? 100 : 170;
-  const svgSize = isSmallScreen ? 240 : 440;
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const centerX = isMobile ? 100 : 220;
+  const centerY = isMobile ? 100 : 220;
+  const radius = isMobile ? 70 : 120;
+  const iconDistance = isMobile ? 90 : 170;
+  const svgSize = isMobile ? 200 : 440;
 
   useEffect(() => {
     if (inView) {
@@ -551,9 +559,18 @@ const FeatureCircle = () => {
   const selectedFeature = features[selectedIndex];
 
   return (
-    <div ref={ref} className="flex flex-col md:flex-row gap-8 px-2 py-6 items-center justify-center w-full">
-      <div className="relative feature-svg-wrapper">
-        <svg width={svgSize} height={svgSize}>
+    <div 
+      ref={ref} 
+      className="flex flex-col md:flex-row gap-4 md:gap-8 px-4 py-6 md:py-12 items-center justify-center w-full max-w-6xl mx-auto "
+    >
+      <div className="relative feature-svg-wrapper w-full max-w-[200px] md:max-w-[440px] mt-5">
+        <svg 
+        
+          width="100%" 
+          height="auto" 
+          viewBox={`0 0 ${svgSize} ${svgSize}`}
+          className="mx-auto"
+        >
           <defs>
             {features.map((_, idx) => (
               <marker key={idx} id={`arrowhead-${idx}`} markerWidth="10" markerHeight="10" refX="6" refY="5" orient="auto">
@@ -563,7 +580,8 @@ const FeatureCircle = () => {
           </defs>
 
           {features.map((feature, idx) => {
-            const angleRad = (feature.angle * Math.PI) / 180;
+            const angle = (360 / features.length) * idx;  // Evenly spaced angles
+            const angleRad = (angle * Math.PI) / 180;
             const x = centerX + radius * Math.cos(angleRad);
             const y = centerY + radius * Math.sin(angleRad);
             const iconX = centerX + iconDistance * Math.cos(angleRad);
@@ -571,7 +589,7 @@ const FeatureCircle = () => {
             const isActive = idx === selectedIndex;
 
             return (
-              <React.Fragment key={idx}>
+              <g key={idx}>
                 <line
                   x1={centerX}
                   y1={centerY}
@@ -587,34 +605,43 @@ const FeatureCircle = () => {
                   }}
                 />
                 <foreignObject
-                  x={iconX - 50}
-                  y={iconY - 25}
-                  width={100}
-                  height={50}
+                  x={iconX - (isMobile ? 30 : 60)}
+                  y={iconY - (isMobile ? 15 : 30)}
+                  width={isMobile ? 60 : 120}
+                  height={isMobile ? 30 : 60}
                   style={{
                     opacity: animationStarted ? 1 : 0,
-                    transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s`
+                    transition: `opacity 0.5s ease ${idx * 0.1 + 0.5}s`,
+                    overflow: "visible"
                   }}
                 >
                   <div className={`feature-label ${isActive ? 'active-icon glow' : ''}`}>
-                    <div className="flex flex-col items-center">
-                      <div className="text-xl md:text-2xl">{feature.icon}</div>
-                      <div className="text-xs text-center mt-1">{feature.label}</div>
+                    <div className="flex flex-col items-center text-center">
+                      <div className="text-sm md:text-xl">{feature.icon}</div>
+                      <div className="text-[10px] md:text-xs leading-tight break-words px-1">
+                        {feature.label}
+                      </div>
                     </div>
                   </div>
                 </foreignObject>
-              </React.Fragment>
+              </g>
             );
           })}
 
-          <circle cx={centerX} cy={centerY} r={isSmallScreen ? 25 : 35} fill="#1e3a8a" className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
-            style={{ transition: 'transform 0.5s ease', transformOrigin: 'center' }} />
+          <circle 
+            cx={centerX} 
+            cy={centerY} 
+            r={isMobile ? 20 : 35} 
+            fill="#1e3a8a" 
+            className={`drop-shadow-xl ${animationStarted ? 'scale-100' : 'scale-0'}`}
+            style={{ transition: 'transform 0.5s ease', transformOrigin: 'center' }} 
+          />
           <text
             x={centerX}
-            y={centerY + 5}
+            y={centerY + (isMobile ? 4 : 5)}
             textAnchor="middle"
             fill="#fff"
-            fontSize="13"
+            fontSize={isMobile ? "10" : "13"}
             fontWeight="bold"
             style={{
               opacity: animationStarted ? 1 : 0,
@@ -627,12 +654,16 @@ const FeatureCircle = () => {
       </div>
 
       {selectedFeature && (
-        <div className="feature-card animate-fadeInCard">
+        <div className="feature-card animate-fadeInCard w-full max-w-[320px] md:max-w-[380px]">
           <h2 className="feature-title">
-            <span className="text-xl">{selectedFeature.icon}</span>
+            <span className="text-lg md:text-xl">{selectedFeature.icon}</span>
             {selectedFeature.label}
           </h2>
-          <img src={selectedFeature.image} alt={selectedFeature.label} className="feature-image" />
+          <img 
+            src={selectedFeature.image} 
+            alt={selectedFeature.label} 
+            className="feature-image" 
+          />
           <p className="feature-desc">{selectedFeature.description}</p>
         </div>
       )}

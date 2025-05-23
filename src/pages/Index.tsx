@@ -21,10 +21,12 @@ import CarouselSection from '@/components/CarouselSection';
 import FAQSection from '@/components/FAQSection';
 import BusinessJourney from '@/components/BusinessJourney';
 import FeaturesDiagram from '@/components/FeaturesDiagram';
-import DashboardSection from '@/components/newcustomer/DashboardSection';
 
-import HeroSectionss from '@/components/newcustomer/HeroSectionss';
+
+
 import SendEmailPage from '@/components/newcustomer/SendEmailPage';
+import SevenCircleChart from '@/components/ConcentricSegmentedCircle';
+import StageCircleDiagram from '@/components/ConcentricSegmentedCircle';
 
 const Index = () => {
 
@@ -102,6 +104,7 @@ const Index = () => {
       <HeroSection />
       <BusinessJourney />
       <FeaturesDiagram />
+      {/* <StageCircleDiagram /> */}
       <ValueProposition />
       <div>
       <GrowthSection imageUrl={growthImage} />
