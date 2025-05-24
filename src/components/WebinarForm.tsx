@@ -310,7 +310,9 @@ const WebinarForm = () => {
           {/* Left Side: Webinar Details Card */}
           <div className="lg:w-1/2">
             {recentWebinar && (
-              <WebinarDetailsCard key={recentWebinar.id} {...recentWebinar} />
+              <WebinarDetailsCard whatsapp_link={''} onEdit={function (): void {
+                throw new Error('Function not implemented.');
+              } } key={recentWebinar.id} {...recentWebinar} />
             )}
           </div>
 
