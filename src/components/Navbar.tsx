@@ -211,11 +211,11 @@ const Navbar = () => {
 
             {/* Mobile Buttons */}
             <div className="flex flex-col space-y-2 pt-2">
-              <Link to="/login">
+              {/* <Link to="/login">
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300">
                   Log in
                 </Button>
-              </Link>
+              </Link> */}
 
               <Link to="" onClick={() => setIsMenuOpen(false)}>
                 <Button className="w-full bg-secondary hover:bg-secondary-light text-white">

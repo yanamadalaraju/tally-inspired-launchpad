@@ -39,7 +39,8 @@ const WebinarStatsBanner = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300 min-h-[300px]">
+    <div className="w-full h-full bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 border border-gray-200 rounded-lg p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300">
+
       <div className="flex items-start mb-4">
         <div className="mr-4">
           <div className="bg-blue-500 p-3 rounded-full">
