@@ -749,9 +749,7 @@ const handleSubmit = async (e) => {
 </p>
  {whatsappLink && (
               <>
-                <p className="text-xs text-gray-700 mt-4 mb-1">
-                  📢 Stay connected!
-                </p>
+                
                 <a
                   href={whatsappLink}
                   target="_blank"

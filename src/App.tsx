@@ -24,10 +24,8 @@ import RequestDemoTable from "./admin/Existing_Customers/RequestDemoTable";
 import EditDemoRequest from "./admin/Existing_Customers/EditDemoRequest";
 import AllPaymentsPage from "./pages/AllPaymentsPage";
 import StatusPage from "./pages/StatusPage";
-import SendEmailPage from "./components/newcustomer/SendEmailPage";
-import EmailSender from "./components/newcustomer/Email";
-import SendEmail from "./components/newcustomer/Email";
-import Sendmail from "./components/newcustomer/Sendmail";
+
+
 // import EmailForm from "./components/newcustomer/EmailForm";
 
 const queryClient = new QueryClient();
@@ -57,9 +55,8 @@ const App = () => (
           <Route path="/edit-request/:id" element={<EditDemoRequest />} />
           <Route path="/allpayments" element={<AllPaymentsPage />} />
           <Route path="/payment" element={<StatusPage />} />
-          <Route path="/sendmail" element={<SendEmailPage />} />
-          {/* <Route path="/send" element={<EmailForm />} /> */}
-          <Route path="/send" element={<Sendmail />} />
+          
+         
           
           
           

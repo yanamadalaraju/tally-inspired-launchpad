@@ -218,7 +218,7 @@ const Navbar = () => {
               </Link> */}
 
               <Link to="" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full bg-secondary hover:bg-secondary-light text-white">
+                <Button className="w-full bg-secondary hover:bg-secondary-light text-white" onClick={handleClick}>
                   Get Demo
                 </Button>
               </Link>
