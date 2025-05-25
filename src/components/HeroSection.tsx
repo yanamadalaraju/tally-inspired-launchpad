@@ -453,7 +453,7 @@
 
 // export default HeroSection;
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect} from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -464,6 +464,7 @@ const HeroSection = () => {
   const formRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [shakeForm, setShakeForm] = useState(false);
+  const [whatsappLink, setWhatsappLink] = useState('');
   const [loading, setLoading] = useState(false); // <- NEW
   const [formData, setFormData] = useState({
     role: '',
@@ -474,6 +475,35 @@ const HeroSection = () => {
     pincode: '',
   });
   const [message, setMessage] = useState('');
+
+   // Fetch the latest webinar's WhatsApp link
+  // Fetch the latest webinar's WhatsApp link
+  useEffect(() => {
+    const fetchLatestWebinar = async () => {
+      try {
+        const response = await fetch(`${baseURL}/webinars`);
+        const webinars = await response.json();
+        
+        if (webinars.length > 0) {
+          // Sort by date to get the most recent webinar
+          const sortedWebinars = [...webinars].sort((a, b) => {
+            const dateA = new Date(`${a.date} ${a.time}`).getTime();
+            const dateB = new Date(`${b.date} ${b.time}`).getTime();
+            return dateB - dateA;
+          });
+          
+          // Set the WhatsApp link from the most recent webinar
+          if (sortedWebinars[0].whatsapp_link) {
+            setWhatsappLink(sortedWebinars[0].whatsapp_link);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching webinars:', error);
+      }
+    };
+
+    fetchLatestWebinar();
+  }, []);
 
   const handleFormShake = () => {
     setShakeForm(true);
@@ -491,28 +521,73 @@ const HeroSection = () => {
   };
 
   
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   const { role, name, phone, email, pincode } = formData;
+
+//   if (role && name && phone && email && pincode) {
+//     setLoading(true); // Start loading
+//     try {
+//       // Step 1: Fetch webinars
+//       const webinarRes = await fetch(`${baseURL}/webinars`);
+//       const webinars = await webinarRes.json();
+
+//       // Step 2: Get the highest webinar ID
+//       const maxWebinar = webinars.reduce((max, webinar) => {
+//         return webinar.id > max.id ? webinar : max;
+//       }, webinars[0]);
+
+//       const updatedFormData = {
+//         ...formData,
+//         webinar_id: maxWebinar?.webinar_id || null, // Step 3: Add webinar_id
+//       };
+
+//       // Step 4: Submit form
+//       const response = await fetch(`${baseURL}/submit-form`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(updatedFormData),
+//       });
+
+//       if (response.ok) {
+//         setFormSubmitted(true);
+//         setMessage('✅ Registration Successful! You will receive an email shortly.');
+//       } else {
+//         setMessage('❌ Error submitting form. Please try again.');
+//       }
+//     } catch (error) {
+//       console.error('Error submitting form:', error);
+//       setMessage('❌ Error submitting form. Please try again.');
+//     } finally {
+//       setLoading(false); // Stop loading
+//     }
+//   } else {
+//     handleFormShake();
+//     setMessage('❌ Please fill all required fields.');
+//   }
+// };
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   const { role, name, phone, email, pincode } = formData;
 
   if (role && name && phone && email && pincode) {
-    setLoading(true); // Start loading
+    setLoading(true);
     try {
-      // Step 1: Fetch webinars
       const webinarRes = await fetch(`${baseURL}/webinars`);
       const webinars = await webinarRes.json();
 
-      // Step 2: Get the highest webinar ID
       const maxWebinar = webinars.reduce((max, webinar) => {
         return webinar.id > max.id ? webinar : max;
       }, webinars[0]);
 
       const updatedFormData = {
         ...formData,
-        webinar_id: maxWebinar?.webinar_id || null, // Step 3: Add webinar_id
+        webinar_id: maxWebinar?.webinar_id || null,
       };
 
-      // Step 4: Submit form
       const response = await fetch(`${baseURL}/submit-form`, {
         method: 'POST',
         headers: {
@@ -522,7 +597,7 @@ const handleSubmit = async (e) => {
       });
 
       if (response.ok) {
-        setFormSubmitted(true);
+        setFormSubmitted(true); // ✅ Make sure this stays true
         setMessage('✅ Registration Successful! You will receive an email shortly.');
       } else {
         setMessage('❌ Error submitting form. Please try again.');
@@ -531,7 +606,7 @@ const handleSubmit = async (e) => {
       console.error('Error submitting form:', error);
       setMessage('❌ Error submitting form. Please try again.');
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   } else {
     handleFormShake();
@@ -672,20 +747,27 @@ const handleSubmit = async (e) => {
     <p className="text-xs text-gray-700 mt-4 mb-1">
   📢 Stay connected!
 </p>
-<a
-  href="https://chat.whatsapp.com/KyXpyUh6BBcBCIrWDr1i1T"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-block text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium shadow-sm hover:bg-green-200 transition"
->
-  <span className="inline-block animate-shake">👉</span>
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-    alt="WhatsApp"
-    className="inline-block w-4 h-4 ml-1 mr-2 align-text-bottom"
-  />
-  📱 Join our WhatsApp Group to get real-time updates, reminders, and exclusive webinar resources!
-</a>
+ {whatsappLink && (
+              <>
+                <p className="text-xs text-gray-700 mt-4 mb-1">
+                  📢 Stay connected!
+                </p>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-xs bg-green-100 text-green-800 px-3 py-1 rounded-full font-medium shadow-sm hover:bg-green-200 transition"
+                >
+                  <span className="inline-block animate-shake">👉</span>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                    alt="WhatsApp"
+                    className="inline-block w-4 h-4 ml-1 mr-2 align-text-bottom"
+                  />
+                  📱 Join our WhatsApp Group for updates and resources!
+                </a>
+              </>
+            )}
 
 
 
